@@ -1,0 +1,6 @@
+framework module Pods_TiklaMarket {
+  umbrella header "Pods-TiklaMarket-umbrella.h"
+
+  export *
+  module * { export * }
+}

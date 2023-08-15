@@ -14,6 +14,11 @@
 		1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */; };
 		102594502A8B508B00F2711D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1025944F2A8B508B00F2711D /* Assets.xcassets */; };
 		102594532A8B508B00F2711D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102594512A8B508B00F2711D /* LaunchScreen.storyboard */; };
+		1025945B2A8B52F600F2711D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1025945A2A8B52F600F2711D /* GoogleService-Info.plist */; };
+		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
+		104538592A8B65880076624E /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538582A8B65880076624E /* MainCollectionVC.swift */; };
+		1045385B2A8B659E0076624E /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045385A2A8B659E0076624E /* Main.swift */; };
+		2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,13 @@
 		1025944F2A8B508B00F2711D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		102594522A8B508B00F2711D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		102594542A8B508B00F2711D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1025945A2A8B52F600F2711D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		104538552A8B65110076624E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		104538582A8B65880076624E /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
+		1045385A2A8B659E0076624E /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.release.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.release.xcconfig"; sourceTree = "<group>"; };
+		476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.debug.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.debug.xcconfig"; sourceTree = "<group>"; };
+		D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TiklaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +57,8 @@
 			children = (
 				102594422A8B508A00F2711D /* TiklaMarket */,
 				102594412A8B508A00F2711D /* Products */,
+				79028ADDF350B939F3DA2494 /* Pods */,
+				412E113CD06439712B078E89 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +73,7 @@
 		102594422A8B508A00F2711D /* TiklaMarket */ = {
 			isa = PBXGroup;
 			children = (
+				104538572A8B654F0076624E /* Main */,
 				102594432A8B508A00F2711D /* AppDelegate.swift */,
 				102594452A8B508A00F2711D /* SceneDelegate.swift */,
 				102594472A8B508A00F2711D /* ViewController.swift */,
@@ -65,9 +81,37 @@
 				1025944F2A8B508B00F2711D /* Assets.xcassets */,
 				102594512A8B508B00F2711D /* LaunchScreen.storyboard */,
 				102594542A8B508B00F2711D /* Info.plist */,
+				1025945A2A8B52F600F2711D /* GoogleService-Info.plist */,
 				1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */,
 			);
 			path = TiklaMarket;
+			sourceTree = "<group>";
+		};
+		104538572A8B654F0076624E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				104538552A8B65110076624E /* MainVC.swift */,
+				104538582A8B65880076624E /* MainCollectionVC.swift */,
+				1045385A2A8B659E0076624E /* Main.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		412E113CD06439712B078E89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		79028ADDF350B939F3DA2494 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */,
+				38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +121,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 102594572A8B508B00F2711D /* Build configuration list for PBXNativeTarget "TiklaMarket" */;
 			buildPhases = (
+				95F77A543651AEABE011D804 /* [CP] Check Pods Manifest.lock */,
 				1025943C2A8B508A00F2711D /* Sources */,
 				1025943D2A8B508A00F2711D /* Frameworks */,
 				1025943E2A8B508A00F2711D /* Resources */,
+				39B63482DA9115DE53D0D93F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				102594532A8B508B00F2711D /* LaunchScreen.storyboard in Resources */,
+				1025945B2A8B52F600F2711D /* GoogleService-Info.plist in Resources */,
 				102594502A8B508B00F2711D /* Assets.xcassets in Resources */,
 				1025944B2A8B508A00F2711D /* Main.storyboard in Resources */,
 			);
@@ -136,14 +183,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		39B63482DA9115DE53D0D93F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		95F77A543651AEABE011D804 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TiklaMarket-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1025943C2A8B508A00F2711D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				102594482A8B508A00F2711D /* ViewController.swift in Sources */,
+				104538592A8B65880076624E /* MainCollectionVC.swift in Sources */,
+				104538562A8B65110076624E /* MainVC.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				102594442A8B508A00F2711D /* AppDelegate.swift in Sources */,
+				1045385B2A8B659E0076624E /* Main.swift in Sources */,
 				102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +378,7 @@
 		};
 		102594582A8B508B00F2711D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -314,6 +407,7 @@
 		};
 		102594592A8B508B00F2711D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
