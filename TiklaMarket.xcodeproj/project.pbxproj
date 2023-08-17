@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		102594442A8B508A00F2711D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102594432A8B508A00F2711D /* AppDelegate.swift */; };
 		102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102594452A8B508A00F2711D /* SceneDelegate.swift */; };
-		102594482A8B508A00F2711D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102594472A8B508A00F2711D /* ViewController.swift */; };
 		1025944B2A8B508A00F2711D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102594492A8B508A00F2711D /* Main.storyboard */; };
 		1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */; };
 		102594502A8B508B00F2711D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1025944F2A8B508B00F2711D /* Assets.xcassets */; };
@@ -18,6 +17,9 @@
 		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
 		104538592A8B65880076624E /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538582A8B65880076624E /* MainCollectionVC.swift */; };
 		1045385B2A8B659E0076624E /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045385A2A8B659E0076624E /* Main.swift */; };
+		10AC291A2A8E91B60005901C /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC29192A8E91B60005901C /* ProductVC.swift */; };
+		10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC291D2A8E95750005901C /* ProductCollectionVC.swift */; };
+		10AC29202A8E96970005901C /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC291F2A8E96970005901C /* Product.swift */; };
 		2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +27,6 @@
 		102594402A8B508A00F2711D /* TiklaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiklaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		102594432A8B508A00F2711D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		102594452A8B508A00F2711D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		102594472A8B508A00F2711D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1025944A2A8B508A00F2711D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1025944D2A8B508A00F2711D /* TiklaMarket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TiklaMarket.xcdatamodel; sourceTree = "<group>"; };
 		1025944F2A8B508B00F2711D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,6 +36,9 @@
 		104538552A8B65110076624E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		104538582A8B65880076624E /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		1045385A2A8B659E0076624E /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		10AC29192A8E91B60005901C /* ProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVC.swift; sourceTree = "<group>"; };
+		10AC291D2A8E95750005901C /* ProductCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionVC.swift; sourceTree = "<group>"; };
+		10AC291F2A8E96970005901C /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.release.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.release.xcconfig"; sourceTree = "<group>"; };
 		476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.debug.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TiklaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,10 +77,10 @@
 		102594422A8B508A00F2711D /* TiklaMarket */ = {
 			isa = PBXGroup;
 			children = (
+				10577A572A8CD88500DC15E1 /* Product */,
 				104538572A8B654F0076624E /* Main */,
 				102594432A8B508A00F2711D /* AppDelegate.swift */,
 				102594452A8B508A00F2711D /* SceneDelegate.swift */,
-				102594472A8B508A00F2711D /* ViewController.swift */,
 				102594492A8B508A00F2711D /* Main.storyboard */,
 				1025944F2A8B508B00F2711D /* Assets.xcassets */,
 				102594512A8B508B00F2711D /* LaunchScreen.storyboard */,
@@ -95,6 +99,16 @@
 				1045385A2A8B659E0076624E /* Main.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		10577A572A8CD88500DC15E1 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				10AC29192A8E91B60005901C /* ProductVC.swift */,
+				10AC291D2A8E95750005901C /* ProductCollectionVC.swift */,
+				10AC291F2A8E96970005901C /* Product.swift */,
+			);
+			path = Product;
 			sourceTree = "<group>";
 		};
 		412E113CD06439712B078E89 /* Frameworks */ = {
@@ -230,11 +244,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				102594482A8B508A00F2711D /* ViewController.swift in Sources */,
 				104538592A8B65880076624E /* MainCollectionVC.swift in Sources */,
+				10AC291A2A8E91B60005901C /* ProductVC.swift in Sources */,
 				104538562A8B65110076624E /* MainVC.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				102594442A8B508A00F2711D /* AppDelegate.swift in Sources */,
+				10AC29202A8E96970005901C /* Product.swift in Sources */,
+				10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */,
 				1045385B2A8B659E0076624E /* Main.swift in Sources */,
 				102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */,
 			);

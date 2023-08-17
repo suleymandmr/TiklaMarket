@@ -62,7 +62,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     
     func fetchRealtimeDatabaseData() {
         
-        let db = Database.database().reference().child("Katogoriler").queryOrderedByKey()
+        let db = Database.database().reference().child("Categories").queryOrderedByKey()
         db.observeSingleEvent(of: .value) { (snapshot) in
             guard let filmsSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
                 print("Realtime Database'den veri çekerken hata oluştu.")
@@ -73,7 +73,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
             for filmSnapshot in filmsSnapshot {
                 let id = filmSnapshot.key
                 let filmData = filmSnapshot.value as! [String: Any]
-                if let baslik = filmData["KatogoriName"] as? String,
+                if let baslik = filmData["CategoryName"] as? String,
                    let resimAdi = filmData["Image"] as? String {
                     let film = Main(id: id, baslik: baslik, resimAdi: resimAdi)
                     self.katogoriListesi.append(film)
@@ -107,26 +107,15 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        photoTapped(at: indexPath)
-
+        let selectedCategory = katogoriListesi[indexPath.row]
+        performSegue(withIdentifier: "ProductVC", sender: selectedCategory)
     }
     
-    
-}
-extension MainVC {
-    func photoTapped(at indexPath: IndexPath) {
-        
-        print("Photo tapped at index: \(indexPath.row)")
-        
-        if(indexPath.row == 0){
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-           
-               //next.photoData = photoData
-               //self.present(next, animated: true, completion: nil)
-            self.navigationController?.pushViewController(next, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProductVC", let selectedCategory = sender as? Main {
+            if let destinationVC = segue.destination as? ProductVC {
+                destinationVC.selectedCategory = selectedCategory
+            }
         }
-        
-       
-}
-
+    }
 }
