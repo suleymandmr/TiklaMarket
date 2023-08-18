@@ -11,16 +11,17 @@ import SDWebImage
 import FirebaseStorage
 import MapKit
 import CoreLocation
-
+import FirebaseDatabase
+import XLPagerTabStrip
 class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
-    
+    var ref: DatabaseReference!
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
     @IBOutlet weak var collectionView: UICollectionView!
     
     var katogori: [String] = [String]()
-    var katogoriListesi = [Main]()
-    var photoDataArray: [Main] = []
+    var katogoriListesi = [Category]()
+    var photoDataArray: [Category] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +49,15 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         collectionView.dataSource = self
         collectionView.allowsSelection = true
         fetchRealtimeDatabaseData()
+        
+        
+        
+        
+       
     }
+ 
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
@@ -71,11 +80,11 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
             
             // Realtime Database verilerini sinemaListesi'ne ekleyelim
             for filmSnapshot in filmsSnapshot {
-                let id = filmSnapshot.key
                 let filmData = filmSnapshot.value as! [String: Any]
                 if let baslik = filmData["CategoryName"] as? String,
+                   let id = filmData["id"] as? Int,
                    let resimAdi = filmData["Image"] as? String {
-                    let film = Main(id: id, baslik: baslik, resimAdi: resimAdi)
+                    let film = Category(id: id, baslik: baslik, resimAdi: resimAdi)
                     self.katogoriListesi.append(film)
                 }
             }
@@ -85,6 +94,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
         
     }
+    
 }
 
 extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -107,15 +117,25 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCategory = katogoriListesi[indexPath.row]
-        performSegue(withIdentifier: "ProductVC", sender: selectedCategory)
+        let category = katogoriListesi[indexPath.row]
+        photoTapped(at: category)
+
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProductVC", let selectedCategory = sender as? Main {
-            if let destinationVC = segue.destination as? ProductVC {
-                destinationVC.selectedCategory = selectedCategory
-            }
-        }
-    }
+  
+    
 }
+extension MainVC {
+    func photoTapped(at category: Category) {
+        
+        //print("Photo tapped at index: \(id)")
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductVC") as! ProductVC
+        next.selectedCategory = category
+        
+        //next.photoData = photoData
+        //self.present(next, animated: true, completion: nil)
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+}
+

@@ -13,6 +13,8 @@ pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod 'SDWebImage', '~> 5.0'
 pod 'SideMenu'
+pod 'Parchment', '~> 3.2'
+pod 'XLPagerTabStrip', '~> 9.0'
 
   # Pods for TiklaMarket
 

@@ -6,12 +6,12 @@
 //
 
 import Foundation
-class Main {
-    var id: String
+class Category {
+    var id: Int
     var baslik: String
     var resimAdi: String
     
-    init(id: String, baslik: String, resimAdi: String) {
+    init(id: Int, baslik: String, resimAdi: String) {
         self.id = id
         self.baslik = baslik
         self.resimAdi = resimAdi

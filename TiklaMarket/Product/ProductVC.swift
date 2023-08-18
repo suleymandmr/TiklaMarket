@@ -9,10 +9,18 @@ import UIKit
 import Firebase
 import SDWebImage
 import FirebaseStorage
+import XLPagerTabStrip
+
 class ProductVC: UIViewController {
-    var selectedCategory: Main?
+    var databaseRef: DatabaseReference!
+
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    var sampleData: [MyDataModel] = []
+    
+    var selectedCategory: Category?
     
     
+    var productList: [Product] = []
     var pruduct: [String] = [String]()
     var pruductList = [Product]()
     
@@ -22,8 +30,8 @@ class ProductVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
+    
+        print(selectedCategory?.baslik)
         
         
         
@@ -41,11 +49,10 @@ class ProductVC: UIViewController {
         collectionView.allowsSelection = true
         fetchRealtimeDatabaseData()
          }
-    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        isShowingFirstSegmentData = (sender.selectedSegmentIndex == 0)
-                collectionView.reloadData()
-    }
-
+ 
+   
+     
+    
     func fetchRealtimeDatabaseData() {
         
             let db = Database.database().reference().child("SubCategories")
@@ -97,5 +104,6 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
         //performSegue(withIdentifier: "", sender: nil)
         //photoTapped(at: indexPath)
     }
-    
+ 
 }
+
