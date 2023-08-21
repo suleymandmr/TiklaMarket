@@ -8,12 +8,12 @@
 import Foundation
 class Category {
     var id: Int
-    var baslik: String
-    var resimAdi: String
+    var title: String
+    var Image: String
     
-    init(id: Int, baslik: String, resimAdi: String) {
+    init(id: Int, title: String, Image: String) {
         self.id = id
-        self.baslik = baslik
-        self.resimAdi = resimAdi
+        self.title = title
+        self.Image = Image
     }
 }

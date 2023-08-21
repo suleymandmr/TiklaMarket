@@ -73,19 +73,19 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         
         let db = Database.database().reference().child("Categories").queryOrderedByKey()
         db.observeSingleEvent(of: .value) { (snapshot) in
-            guard let filmsSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+            guard let mainRealtime = snapshot.children.allObjects as? [DataSnapshot] else {
                 print("Realtime Database'den veri çekerken hata oluştu.")
                 return
             }
             
             // Realtime Database verilerini sinemaListesi'ne ekleyelim
-            for filmSnapshot in filmsSnapshot {
-                let filmData = filmSnapshot.value as! [String: Any]
-                if let baslik = filmData["CategoryName"] as? String,
-                   let id = filmData["id"] as? Int,
-                   let resimAdi = filmData["Image"] as? String {
-                    let film = Category(id: id, baslik: baslik, resimAdi: resimAdi)
-                    self.katogoriListesi.append(film)
+            for mainRealtime in mainRealtime {
+                let mainData = mainRealtime.value as! [String: Any]
+                if let title = mainData["CategoryName"] as? String,
+                   let id = mainData["id"] as? Int,
+                   let image = mainData["Image"] as? String {
+                    let main = Category(id: id, title: title, Image: image)
+                    self.katogoriListesi.append(main)
                 }
             }
             
@@ -105,9 +105,9 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionVC", for: indexPath) as! MainCollectionVC
-                let film = katogoriListesi[indexPath.row]
-        cell.mainLabel.text = film.baslik
-        cell.mainImageView.sd_setImage(with: URL(string: film.resimAdi))
+                let main = katogoriListesi[indexPath.row]
+        cell.mainLabel.text = main.title
+        cell.mainImageView.sd_setImage(with: URL(string: main.Image))
                 return cell
     }
     

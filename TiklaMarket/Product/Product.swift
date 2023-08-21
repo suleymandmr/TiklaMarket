@@ -10,6 +10,5 @@ struct Product {
     let productName: String
     let id : String
        let productImageURL: String
-    
-    
+   
 }

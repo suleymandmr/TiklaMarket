@@ -17,12 +17,11 @@
 		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
 		104538592A8B65880076624E /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538582A8B65880076624E /* MainCollectionVC.swift */; };
 		1045385B2A8B659E0076624E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045385A2A8B659E0076624E /* Category.swift */; };
-		107ECFED2A8F947E00C6BD6F /* MyPagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107ECFEC2A8F947E00C6BD6F /* MyPagerViewController.swift */; };
-		107ECFEF2A8F983A00C6BD6F /* ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107ECFEE2A8F983A00C6BD6F /* ChildViewController.swift */; };
 		10AC291A2A8E91B60005901C /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC29192A8E91B60005901C /* ProductVC.swift */; };
 		10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC291D2A8E95750005901C /* ProductCollectionVC.swift */; };
 		10AC29202A8E96970005901C /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC291F2A8E96970005901C /* Product.swift */; };
 		10C594252A8F547C001C54EF /* MyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C594242A8F547C001C54EF /* MyDataModel.swift */; };
+		10E04E4E2A8FA0340048668C /* ButtonsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E04E4D2A8FA0340048668C /* ButtonsCollectionViewCell.swift */; };
 		2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,12 +38,11 @@
 		104538552A8B65110076624E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		104538582A8B65880076624E /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		1045385A2A8B659E0076624E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		107ECFEC2A8F947E00C6BD6F /* MyPagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagerViewController.swift; sourceTree = "<group>"; };
-		107ECFEE2A8F983A00C6BD6F /* ChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildViewController.swift; sourceTree = "<group>"; };
 		10AC29192A8E91B60005901C /* ProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVC.swift; sourceTree = "<group>"; };
 		10AC291D2A8E95750005901C /* ProductCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionVC.swift; sourceTree = "<group>"; };
 		10AC291F2A8E96970005901C /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		10C594242A8F547C001C54EF /* MyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataModel.swift; sourceTree = "<group>"; };
+		10E04E4D2A8FA0340048668C /* ButtonsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCollectionViewCell.swift; sourceTree = "<group>"; };
 		38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.release.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.release.xcconfig"; sourceTree = "<group>"; };
 		476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.debug.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TiklaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,8 +91,6 @@
 				102594542A8B508B00F2711D /* Info.plist */,
 				1025945A2A8B52F600F2711D /* GoogleService-Info.plist */,
 				1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */,
-				107ECFEC2A8F947E00C6BD6F /* MyPagerViewController.swift */,
-				107ECFEE2A8F983A00C6BD6F /* ChildViewController.swift */,
 			);
 			path = TiklaMarket;
 			sourceTree = "<group>";
@@ -116,6 +112,7 @@
 				10AC291D2A8E95750005901C /* ProductCollectionVC.swift */,
 				10AC291F2A8E96970005901C /* Product.swift */,
 				10C594242A8F547C001C54EF /* MyDataModel.swift */,
+				10E04E4D2A8FA0340048668C /* ButtonsCollectionViewCell.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -255,16 +252,15 @@
 			files = (
 				104538592A8B65880076624E /* MainCollectionVC.swift in Sources */,
 				10AC291A2A8E91B60005901C /* ProductVC.swift in Sources */,
-				107ECFED2A8F947E00C6BD6F /* MyPagerViewController.swift in Sources */,
 				104538562A8B65110076624E /* MainVC.swift in Sources */,
 				10C594252A8F547C001C54EF /* MyDataModel.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				102594442A8B508A00F2711D /* AppDelegate.swift in Sources */,
 				10AC29202A8E96970005901C /* Product.swift in Sources */,
+				10E04E4E2A8FA0340048668C /* ButtonsCollectionViewCell.swift in Sources */,
 				10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */,
 				1045385B2A8B659E0076624E /* Category.swift in Sources */,
 				102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */,
-				107ECFEF2A8F983A00C6BD6F /* ChildViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
