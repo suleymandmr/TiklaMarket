@@ -16,23 +16,22 @@ class ProductVC: UIViewController {
     var buttonTitles: [String] = []
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var sampleData: [MyDataModel] = []
-    
+    var selectedProductId: Int = 0
     var selectedCategory: Category?
     
+    var activeProductList: [Product] = []
     
-    var productList: [Product] = []
-    var pruduct: [String] = [String]()
-    var pruductList = [Product]()
+    
     
     @IBOutlet weak var buttonsCollectionView: UICollectionView!
     var isShowingFirstSegmentData = true
     @IBOutlet weak var collectionView: UICollectionView!
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
 
     
-        print(selectedCategory?.id)
+       print(selectedCategory?.id)
         
         let layoutt = UICollectionViewFlowLayout()
         layoutt.scrollDirection = .horizontal
@@ -58,44 +57,30 @@ class ProductVC: UIViewController {
         collectionView.allowsSelection = true
         buttonsCollectionView.delegate = self
         buttonsCollectionView.dataSource = self
-        fetchRealtimeDatabaseData()
+        
+        Task{
+            await fetchRealtimeDatabaseData()
+        }
+
         fetchButtonData()
          }
  
-    
-        
-     
-    
-    func fetchRealtimeDatabaseData() {
-        // Firebase Realtime Database referansını oluşturun ve alt kategori verilerini çekin
-        let db = Database.database().reference().child("SubCategories")
-        db.observeSingleEvent(of: .value) { (snapshot) in
-            // Veri çekme işlemi tamamlandıktan sonra çalışacak kapanma fonksiyonu
-            
-            // snapshot içerisindeki çocuk verileri alın
-            guard let subCategorySnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
-                print("Realtime Database'den veri çekerken hata oluştu.")
-                return
-            }
-            
-            // Realtime Database verilerini pruductList listesine ekleyelim
-            for subCategorySnapshot in subCategorySnapshots {
-                let subCategoryId = subCategorySnapshot.key
-                if let subCategoryData = subCategorySnapshot.value as? [String: Any],
-                   let name = subCategoryData["name"] as? String,
-                   let imageURL = subCategoryData["Image"] as? String
-                  {
-                    let subCategory = Product(productName: name, id: subCategoryId, productImageURL: imageURL)
-                    self.pruductList.append(subCategory)
-                }
-            }
-            
+
+    func fetchRealtimeDatabaseData() async{
+        do{
+            // Firebase Realtime Database referansını oluşturun ve alt kategori verilerini çekin
+            var data = await Api().getProductData(selectedID: selectedCategory!.id)
+            //print("DATA ",data)
+            self.activeProductList = data!
             // Realtime Database verilerini aldıktan sonra gridview'i yenile
             self.collectionView.reloadData()
+        }catch{
+           // print("ERR2")
         }
     }
+    
     func fetchButtonData() {
-        let db = Database.database().reference().child("SubCategories")
+        let db = Database.database().reference().child("Categories")
         db.observeSingleEvent(of: .value) { (snapshot) in
             guard let buttonSnapshots = snapshot.children.allObjects as? [DataSnapshot] else {
                 print("Buttons verilerini çekerken hata oluştu.")
@@ -103,7 +88,7 @@ class ProductVC: UIViewController {
             }
             
             for buttonSnapshot in buttonSnapshots {
-                if let buttonText = buttonSnapshot.childSnapshot(forPath: "title").value as? String {
+                if let buttonText = buttonSnapshot.childSnapshot(forPath: "CategoryName").value as? String {
                     self.buttonTitles.append(buttonText)
                 }
             }
@@ -116,16 +101,19 @@ class ProductVC: UIViewController {
 }
 extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
+   
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == buttonsCollectionView {
-          return 10
-            //  return buttonTitles.count
+          
+              return buttonTitles.count
         } else {
-            return pruductList.count
+            return activeProductList.count
         }
     
         
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == buttonsCollectionView {
@@ -142,7 +130,7 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionVC", for: indexPath) as! ProductCollectionVC
-            let film = pruductList[indexPath.row]
+            let film = activeProductList[indexPath.row]
             cell.productLabel.text = film.productName
             cell.productImageView.sd_setImage(with: URL(string: film.productImageURL))
             return cell
@@ -156,6 +144,9 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+        
         //performSegue(withIdentifier: "", sender: nil)
         //photoTapped(at: indexPath)
     }

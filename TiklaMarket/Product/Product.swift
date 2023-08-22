@@ -7,8 +7,9 @@
 
 import Foundation
 struct Product {
-    let productName: String
-    let id : String
-       let productImageURL: String
+    var productName: String
+    var id : String
+       var productImageURL: String
    
+    
 }

@@ -12,4 +12,8 @@ class MainCollectionVC: UICollectionViewCell {
     
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var mainImageView: UIImageView!
+    func configure(with product: Product) {
+        mainImageView.image = UIImage(named: product.productImageURL)
+       }
+    
 }

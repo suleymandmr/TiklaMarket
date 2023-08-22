@@ -12,15 +12,15 @@ import FirebaseStorage
 import MapKit
 import CoreLocation
 import FirebaseDatabase
-import XLPagerTabStrip
+
 class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     var ref: DatabaseReference!
     @IBOutlet weak var mapView: MKMapView!
     let locationManager = CLLocationManager()
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var katogori: [String] = [String]()
-    var katogoriListesi = [Category]()
+    var category: [String] = [String]()
+    var categoryList = [Category]()
     var photoDataArray: [Category] = []
     
     override func viewDidLoad() {
@@ -32,8 +32,6 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                locationManager.startUpdatingLocation()
                
 
-
-        
         
         let layout = UICollectionViewFlowLayout()
         let cellWidth: CGFloat = 80 // Sabit genişlik değeri
@@ -67,10 +65,8 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
 
       
-    
-    
     func fetchRealtimeDatabaseData() {
-        
+
         let db = Database.database().reference().child("Categories").queryOrderedByKey()
         db.observeSingleEvent(of: .value) { (snapshot) in
             guard let mainRealtime = snapshot.children.allObjects as? [DataSnapshot] else {
@@ -85,7 +81,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                    let id = mainData["id"] as? Int,
                    let image = mainData["Image"] as? String {
                     let main = Category(id: id, title: title, Image: image)
-                    self.katogoriListesi.append(main)
+                    self.categoryList.append(main)
                 }
             }
             
@@ -94,18 +90,17 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
         
     }
-    
 }
 
 extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return katogoriListesi.count
+        return categoryList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionVC", for: indexPath) as! MainCollectionVC
-                let main = katogoriListesi[indexPath.row]
+                let main = categoryList[indexPath.row]
         cell.mainLabel.text = main.title
         cell.mainImageView.sd_setImage(with: URL(string: main.Image))
                 return cell
@@ -117,9 +112,9 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let category = katogoriListesi[indexPath.row]
+        let category = categoryList[indexPath.row]
         photoTapped(at: category)
-
+        
     }
     
   
@@ -131,11 +126,11 @@ extension MainVC {
         //print("Photo tapped at index: \(id)")
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductVC") as! ProductVC
         next.selectedCategory = category
-        
         //next.photoData = photoData
         //self.present(next, animated: true, completion: nil)
         self.navigationController?.pushViewController(next, animated: true)
     }
     
 }
+
 
