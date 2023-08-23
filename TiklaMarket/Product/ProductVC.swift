@@ -14,36 +14,29 @@ import XLPagerTabStrip
 class ProductVC: UIViewController {
     var databaseRef: DatabaseReference!
     var buttonTitles: [String] = []
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    var sampleData: [MyDataModel] = []
-    var selectedProductId: Int = 0
+    
     var selectedCategory: Category?
-    
     var activeProductList: [Product] = []
-    
-    
-    
-    @IBOutlet weak var buttonsCollectionView: UICollectionView!
-    var isShowingFirstSegmentData = true
+
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad(){
         super.viewDidLoad()
 
     
-       print(selectedCategory?.id)
+        print(selectedCategory?.id as Any)
         
         let layoutt = UICollectionViewFlowLayout()
         layoutt.scrollDirection = .horizontal
         let cellWidtht: CGFloat = 120 // Sabit genişlik değeri
-        let cellHeightt: CGFloat = 50 // Sabit yükseklik değeri
+        let cellHeightt: CGFloat = 60 // Sabit yükseklik değeri
         layoutt.itemSize = CGSize(width: cellWidtht, height: cellHeightt)
         layoutt.minimumInteritemSpacing = 11
-        layoutt.minimumLineSpacing = 8
-        buttonsCollectionView.collectionViewLayout = layoutt
+        layoutt.minimumLineSpacing = 10
+        categoryCollectionView.collectionViewLayout = layoutt
         
-        
-        
+    
         let layout = UICollectionViewFlowLayout()
         let cellWidth: CGFloat = 80 // Sabit genişlik değeri
         let cellHeight: CGFloat = 120 // Sabit yükseklik değeri
@@ -52,11 +45,16 @@ class ProductVC: UIViewController {
         layout.minimumLineSpacing = 8
         collectionView!.collectionViewLayout = layout
         
+        categoryCollectionView.delegate = self
+        categoryCollectionView.dataSource = self
+        
+        
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsSelection = true
-        buttonsCollectionView.delegate = self
-        buttonsCollectionView.dataSource = self
+        
+    
         
         Task{
             await fetchRealtimeDatabaseData()
@@ -68,9 +66,10 @@ class ProductVC: UIViewController {
 
     func fetchRealtimeDatabaseData() async{
         do{
+            print("CLICKED ",self.selectedCategory?.id as Any)
             // Firebase Realtime Database referansını oluşturun ve alt kategori verilerini çekin
-            var data = await Api().getProductData(selectedID: selectedCategory!.id)
-            //print("DATA ",data)
+            var data = await Api().getProductData(selectedID: self.selectedCategory!.id)
+            print("DATA ",data as Any)
             self.activeProductList = data!
             // Realtime Database verilerini aldıktan sonra gridview'i yenile
             self.collectionView.reloadData()
@@ -93,7 +92,7 @@ class ProductVC: UIViewController {
                 }
             }
             
-            self.buttonsCollectionView.reloadData()
+            self.categoryCollectionView.reloadData()
         }
     }
     
@@ -104,8 +103,7 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == buttonsCollectionView {
-          
+        if collectionView == categoryCollectionView {
               return buttonTitles.count
         } else {
             return activeProductList.count
@@ -113,19 +111,20 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
         
     }
-    
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == buttonsCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "buttonsCell", for: indexPath) as? ButtonsCollectionViewCell else {
+        if collectionView == categoryCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as? categoryCell else {
                 return UICollectionViewCell()
             }
+            cell.categoryLabel.text = buttonTitles[indexPath.row]
             
-            if indexPath.row < buttonTitles.count {
+            /*if indexPath.row < buttonTitles.count {
                 cell.buttons.setTitle(buttonTitles[indexPath.row], for: .normal)
             } else {
                 cell.buttons.setTitle("", for: .normal) // Eğer endeks geçerli değilse, boş bir metin göster
-            }
+            }*/
             
             return cell
         } else {
@@ -143,13 +142,39 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)  {
+        if collectionView == categoryCollectionView {
+            print(buttonTitles[indexPath.row])
+            
+            self.selectedCategory?.id = indexPath.row+1
+            self.selectedCategory?.title = buttonTitles[indexPath.row]
+            
+            Task{
+                await fetchRealtimeDatabaseData()
+            }
+
+            
+            
+        } else {
+           
+            
+            //let selectedItem = activeProductList[indexPath.item]  // Retrieve the "data for the clicked item
+             // performSegue(withIdentifier: "ProductVC", sender: selectedItem)
+            
+            //performSegue(withIdentifier: "", sender: nil)
         
-        
-        
-        //performSegue(withIdentifier: "", sender: nil)
-        //photoTapped(at: indexPath)
+            //photoTapped(at: indexPath)
+        }
+
     }
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProductVC" {
+            if let detailViewController = segue.destination as? ProductVC,
+               let selectedItem = sender as? ButtonsCollectionViewCell {
+                //detailViewController.activeButton = selectedItem.buttons
+                selectedItem.backgroundColor = .blue
+            }
+        }
+    }*/
  
 }
-

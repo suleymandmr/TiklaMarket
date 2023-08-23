@@ -44,7 +44,6 @@ class Api{
                 }*/
         
         do{
-            print("actıve data",activeProductList)
             let db = try await Database.database().reference().child("SubCategories").getData()
     
             guard let subCategorySnapshots = db.children.allObjects as? [DataSnapshot] else {
@@ -67,10 +66,8 @@ class Api{
                     }
                 }
             }
-            //print("actıve data 2 ",db)
-            
             return activeProductList
-        }catch{
+        } catch{
             //print("ERR")
             return activeProductList
         }

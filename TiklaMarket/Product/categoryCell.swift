@@ -7,8 +7,7 @@
 
 import UIKit
 
-class ButtonsCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var buttons: UIButton!
-    
+class categoryCell: UICollectionViewCell {
+    @IBOutlet weak var categoryLabel: UILabel!
     
 }
