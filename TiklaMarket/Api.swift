@@ -58,9 +58,10 @@ class Api{
                 if let subCategoryData = subCategorySnapshot.value as? [String: Any],
                    let name = subCategoryData["name"] as? String,
                    let imageURL = subCategoryData["Image"] as? String,
-                   let categoryId = subCategoryData["category_id"] as? Int
+                   let categoryId = subCategoryData["category_id"] as? Int,
+                   let pay = subCategoryData["productFee"] as? String
                 {
-                    let subCategory = Product(productName: name, id: subCategoryId, productImageURL: imageURL)
+                    let subCategory = Product(productName: name, id: subCategoryId, productImageURL: imageURL, productPay: pay)
                     if(categoryId == selectedID ){
                         activeProductList.append(subCategory)
                     }
@@ -72,7 +73,6 @@ class Api{
             return activeProductList
         }
     }
-   
     
     
     

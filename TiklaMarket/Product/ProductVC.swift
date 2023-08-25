@@ -14,7 +14,6 @@ import XLPagerTabStrip
 class ProductVC: UIViewController {
     var databaseRef: DatabaseReference!
     var buttonTitles: [String] = []
-    
     var selectedCategory: Category?
     var activeProductList: [Product] = []
 
@@ -100,18 +99,18 @@ class ProductVC: UIViewController {
 }
 extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
-   
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == categoryCollectionView {
-              return buttonTitles.count
+            return buttonTitles.count
         } else {
             return activeProductList.count
         }
-    
+        
         
     }
-
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoryCollectionView {
@@ -121,15 +120,16 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.categoryLabel.text = buttonTitles[indexPath.row]
             
             /*if indexPath.row < buttonTitles.count {
-                cell.buttons.setTitle(buttonTitles[indexPath.row], for: .normal)
-            } else {
-                cell.buttons.setTitle("", for: .normal) // Eğer endeks geçerli değilse, boş bir metin göster
-            }*/
+             cell.buttons.setTitle(buttonTitles[indexPath.row], for: .normal)
+             } else {
+             cell.buttons.setTitle("", for: .normal) // Eğer endeks geçerli değilse, boş bir metin göster
+             }*/
             
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionVC", for: indexPath) as! ProductCollectionVC
             let film = activeProductList[indexPath.row]
+            cell.payLabel.text = film.productPay
             cell.productLabel.text = film.productName
             cell.productImageView.sd_setImage(with: URL(string: film.productImageURL))
             return cell
@@ -142,7 +142,11 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)  {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+        
         if collectionView == categoryCollectionView {
             print(buttonTitles[indexPath.row])
             
@@ -152,29 +156,37 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             Task{
                 await fetchRealtimeDatabaseData()
             }
-
+            
             
             
         } else {
+            
            
             
-            //let selectedItem = activeProductList[indexPath.item]  // Retrieve the "data for the clicked item
-             // performSegue(withIdentifier: "ProductVC", sender: selectedItem)
+            // let category = activeProductList[indexPath.row]
+            // photoTapped(at: category)
+            
             
             //performSegue(withIdentifier: "", sender: nil)
+            
+            photoTapped(at: indexPath)
+        }
         
-            //photoTapped(at: indexPath)
-        }
-
+        
     }
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProductVC" {
-            if let detailViewController = segue.destination as? ProductVC,
-               let selectedItem = sender as? ButtonsCollectionViewCell {
-                //detailViewController.activeButton = selectedItem.buttons
-                selectedItem.backgroundColor = .blue
-            }
-        }
-    }*/
+}
+    extension ProductVC {
+        func photoTapped(at indexPath: IndexPath) {
+            
+            print("Photo tapped at index: \(indexPath.row)")
+                    
+                    let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as! ProductDetailVC
+                    //next.photoData = photoData
+                    //self.present(next, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(next, animated: true)
+                }
  
 }
+
+
+
