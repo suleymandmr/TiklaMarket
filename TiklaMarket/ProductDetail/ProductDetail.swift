@@ -7,18 +7,12 @@
 
 import Foundation
 
-    class ProductDetail {
-        var id: Int
+    struct ProductDetail {
+        var id: String
         var productName: String
         var productImageURL: String
         var productPay : String
         
-        init(id: Int, productName: String, productImageURL: String, productPay: String) {
-            self.id = id
-            self.productName = productName
-            self.productImageURL = productImageURL
-            self.productPay = productPay
-        }
-    
+       
 
 }

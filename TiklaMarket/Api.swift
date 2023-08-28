@@ -73,7 +73,40 @@ class Api{
             return activeProductList
         }
     }
-    
-    
-    
-}
+    func getProductDetailData(selectedID: Int) async->[ProductDetail]?{
+        
+        var activeProductList:[ProductDetail] = []
+        do{
+            let db = try await Database.database().reference().child("SubCategories").getData()
+            
+            guard let subCategorySnapshots = db.children.allObjects as? [DataSnapshot] else {
+                print("Realtime Database'den veri çekerken hata oluştu.")
+                return []
+            }
+            
+                // Realtime Database verilerini pruductList listesine ekleyelim
+                for subCategorySnapshot in subCategorySnapshots {
+                    let subCategoryId = subCategorySnapshot.key
+                    
+                    if let subCategoryData = subCategorySnapshot.value as? [String: Any],
+                       let name = subCategoryData["name"] as? String,
+                       let imageURL = subCategoryData["Image"] as? String,
+                       let categoryId = subCategoryData["category_id"] as? Int,
+                       let pay = subCategoryData["productFee"] as? String
+                    {
+                        let subCategory = ProductDetail(id: subCategoryId, productName: name, productImageURL: imageURL, productPay: pay)
+                        if(categoryId == selectedID ){
+                            activeProductList.append(subCategory)
+                        }
+                    }
+                }
+                return activeProductList
+            } catch{
+                //print("ERR")
+                return activeProductList
+            }
+            
+            
+        }
+    }
+

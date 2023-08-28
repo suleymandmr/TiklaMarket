@@ -47,27 +47,23 @@ class ProductVC: UIViewController {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
-        
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsSelection = true
         
-    
-        
-        Task{
+        Task {
             await fetchRealtimeDatabaseData()
         }
 
         fetchButtonData()
-         }
+    }
  
 
     func fetchRealtimeDatabaseData() async{
         do{
             print("CLICKED ",self.selectedCategory?.id as Any)
             // Firebase Realtime Database referansını oluşturun ve alt kategori verilerini çekin
-            var data = await Api().getProductData(selectedID: self.selectedCategory!.id)
+            let data = await Api().getProductData(selectedID: self.selectedCategory!.id)
             print("DATA ",data as Any)
             self.activeProductList = data!
             // Realtime Database verilerini aldıktan sonra gridview'i yenile
@@ -181,12 +177,13 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             print("Photo tapped at index: \(indexPath.row)")
                     
                     let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as! ProductDetailVC
+//                sonraki sayfaya listeleme
+                    next.relatedProducts = Array(activeProductList[0..<1])
+                
                     //next.photoData = photoData
                     //self.present(next, animated: true, completion: nil)
                     self.navigationController?.pushViewController(next, animated: true)
                 }
  
 }
-
-
 
