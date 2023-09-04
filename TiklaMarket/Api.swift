@@ -44,7 +44,7 @@ class Api{
                 }*/
         
         do{
-            let db = try await Database.database().reference().child("SubCategories").getData()
+            let db = try await Database.database().reference().child("Products").getData()
     
             guard let subCategorySnapshots = db.children.allObjects as? [DataSnapshot] else {
                 print("Realtime Database'den veri çekerken hata oluştu.")
@@ -59,9 +59,10 @@ class Api{
                    let name = subCategoryData["name"] as? String,
                    let imageURL = subCategoryData["Image"] as? String,
                    let categoryId = subCategoryData["category_id"] as? Int,
-                   let pay = subCategoryData["productFee"] as? String
+                   let pay = subCategoryData["productFee"] as? String,
+                   let subject = subCategoryData["subject"] as? String
                 {
-                    let subCategory = Product(productName: name, id: subCategoryId, productImageURL: imageURL, productPay: pay)
+                    let subCategory = Product(productName: name, id: subCategoryId, productImageURL: imageURL, productPay: pay+" ₺", productSubject: subject)
                     if(categoryId == selectedID ){
                         activeProductList.append(subCategory)
                     }

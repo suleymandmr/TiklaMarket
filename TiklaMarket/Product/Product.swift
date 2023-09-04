@@ -9,8 +9,8 @@ import Foundation
 struct Product {
     var productName: String
     var id : String
-       var productImageURL: String
+    var productImageURL: String
     var productPay : String
-   
+    var productSubject : String
     
 }

@@ -12,11 +12,14 @@ import FirebaseStorage
 import XLPagerTabStrip
 
 class ProductVC: UIViewController {
+    
+    
     var databaseRef: DatabaseReference!
     var buttonTitles: [String] = []
+    var topped: [String] = []
     var selectedCategory: Category?
     var activeProductList: [Product] = []
-
+   
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -156,16 +159,15 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             
         } else {
-            
            
-            
+         
             // let category = activeProductList[indexPath.row]
             // photoTapped(at: category)
             
             
             //performSegue(withIdentifier: "", sender: nil)
             
-            photoTapped(at: indexPath)
+           photoTapped(at: indexPath)
         }
         
         
@@ -177,9 +179,10 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             print("Photo tapped at index: \(indexPath.row)")
                     
                     let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as! ProductDetailVC
-//                sonraki sayfaya listeleme
-                    next.relatedProducts = Array(activeProductList[0..<1])
-                
+//                sonraki sayfaya sınırlı veri geçişi
+//                   next.relatedProducts = Array(activeProductList[0..<1])
+            let selectedProduct = activeProductList[indexPath.row]
+            next.selectedProduct = selectedProduct
                     //next.photoData = photoData
                     //self.present(next, animated: true, completion: nil)
                     self.navigationController?.pushViewController(next, animated: true)
