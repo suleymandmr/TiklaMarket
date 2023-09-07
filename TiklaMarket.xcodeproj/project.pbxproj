@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		100D18CC2AA5F98900C50B38 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100D18CB2AA5F98900C50B38 /* ProfileEditVC.swift */; };
 		102594442A8B508A00F2711D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102594432A8B508A00F2711D /* AppDelegate.swift */; };
 		102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102594452A8B508A00F2711D /* SceneDelegate.swift */; };
 		1025944B2A8B508A00F2711D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102594492A8B508A00F2711D /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
 		104538592A8B65880076624E /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538582A8B65880076624E /* MainCollectionVC.swift */; };
 		1045385B2A8B659E0076624E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045385A2A8B659E0076624E /* Category.swift */; };
+		10741A402AA9ACB000998377 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10741A3F2AA9ACB000998377 /* MapVC.swift */; };
 		10894EEB2A9E141700270B8D /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10894EEA2A9E141700270B8D /* ProfileVC.swift */; };
 		10894EEE2A9E191E00270B8D /* ManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10894EED2A9E191E00270B8D /* ManagementVC.swift */; };
 		10894EF12A9E195B00270B8D /* AddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10894EF02A9E195B00270B8D /* AddressVC.swift */; };
@@ -32,12 +34,12 @@
 		10C594252A8F547C001C54EF /* MyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C594242A8F547C001C54EF /* MyDataModel.swift */; };
 		10D261362AA08C8300460AE2 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D261352AA08C8300460AE2 /* RegisterVC.swift */; };
 		10DC25E12A94AA850059B843 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC25E02A94AA850059B843 /* Api.swift */; };
-		10DC25E32A94AAA90059B843 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC25E22A94AAA90059B843 /* Constants.swift */; };
 		10E04E4E2A8FA0340048668C /* categoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E04E4D2A8FA0340048668C /* categoryCell.swift */; };
 		2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		100D18CB2AA5F98900C50B38 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		102594402A8B508A00F2711D /* TiklaMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiklaMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		102594432A8B508A00F2711D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		102594452A8B508A00F2711D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		104538552A8B65110076624E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		104538582A8B65880076624E /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		1045385A2A8B659E0076624E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		10741A3F2AA9ACB000998377 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		10894EEA2A9E141700270B8D /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		10894EED2A9E191E00270B8D /* ManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementVC.swift; sourceTree = "<group>"; };
 		10894EF02A9E195B00270B8D /* AddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressVC.swift; sourceTree = "<group>"; };
@@ -65,7 +68,6 @@
 		10C594242A8F547C001C54EF /* MyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataModel.swift; sourceTree = "<group>"; };
 		10D261352AA08C8300460AE2 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		10DC25E02A94AA850059B843 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		10DC25E22A94AAA90059B843 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		10E04E4D2A8FA0340048668C /* categoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryCell.swift; sourceTree = "<group>"; };
 		38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.release.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.release.xcconfig"; sourceTree = "<group>"; };
 		476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.debug.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		100D18CA2AA5F97100C50B38 /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				100D18CB2AA5F98900C50B38 /* ProfileEditVC.swift */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
 		102594372A8B508A00F2711D = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 		102594422A8B508A00F2711D /* TiklaMarket */ = {
 			isa = PBXGroup;
 			children = (
+				100D18CA2AA5F97100C50B38 /* ProfileEdit */,
 				108E98202AA068DB00CFFB00 /* Login */,
 				10894EF22A9E197D00270B8D /* PastOrders */,
 				10894EEF2A9E194000270B8D /* Address */,
@@ -115,7 +126,6 @@
 				104538572A8B654F0076624E /* Main */,
 				102594432A8B508A00F2711D /* AppDelegate.swift */,
 				10DC25E02A94AA850059B843 /* Api.swift */,
-				10DC25E22A94AAA90059B843 /* Constants.swift */,
 				102594452A8B508A00F2711D /* SceneDelegate.swift */,
 				102594492A8B508A00F2711D /* Main.storyboard */,
 				1025944F2A8B508B00F2711D /* Assets.xcassets */,
@@ -171,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				10894EF02A9E195B00270B8D /* AddressVC.swift */,
+				10741A3F2AA9ACB000998377 /* MapVC.swift */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -348,11 +359,12 @@
 				102594442A8B508A00F2711D /* AppDelegate.swift in Sources */,
 				10AC29202A8E96970005901C /* Product.swift in Sources */,
 				10E04E4E2A8FA0340048668C /* categoryCell.swift in Sources */,
+				100D18CC2AA5F98900C50B38 /* ProfileEditVC.swift in Sources */,
+				10741A402AA9ACB000998377 /* MapVC.swift in Sources */,
 				103548D52A94E64D0025B8FF /* Button.swift in Sources */,
 				10894EEB2A9E141700270B8D /* ProfileVC.swift in Sources */,
 				10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */,
 				10894EF42A9E199000270B8D /* PastOrdersVC.swift in Sources */,
-				10DC25E32A94AAA90059B843 /* Constants.swift in Sources */,
 				10BDF6EB2A962DC90058E72E /* ProductDetailVC.swift in Sources */,
 				10894EF12A9E195B00270B8D /* AddressVC.swift in Sources */,
 				1045385B2A8B659E0076624E /* Category.swift in Sources */,

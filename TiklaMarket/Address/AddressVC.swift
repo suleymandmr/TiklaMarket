@@ -6,24 +6,28 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
 class AddressVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(FirebaseApp.app() == nil){
+            FirebaseApp.configure()
+        }
 
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func nextViewClicted(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Eğer farklı bir storyboard kullanıyorsanız onun adını verin
+        if let secondViewController = storyboard.instantiateViewController(withIdentifier: "MapVC") as? MapVC {
+            navigationController?.pushViewController(secondViewController, animated: true)
+            tabBarController?.tabBar.tabsVisiblty(false)
+            
+        }
     }
-    */
+ 
 
 }
