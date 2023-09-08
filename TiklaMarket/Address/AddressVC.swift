@@ -19,7 +19,7 @@ class AddressVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FirebaseApp.configure()
+        
         fetchDataFromRealtimeDatabase()
         
         tableView.dataSource = self
@@ -55,7 +55,7 @@ class AddressVC: UIViewController {
      
     @IBAction func nextViewClicted(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Eğer farklı bir storyboard kullanıyorsanız onun adını verin
-        if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
+        if let secondViewController = storyboard.instantiateViewController(withIdentifier: "MapVC") as? MapVC {
             navigationController?.pushViewController(secondViewController, animated: true)
             tabBarController?.tabBar.tabsVisiblty(false)
             

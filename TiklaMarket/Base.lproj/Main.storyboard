@@ -47,12 +47,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nK8-7o-JvI">
-                                                    <rect key="frame" x="63" y="1" width="17" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="gray" title="+"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrd-Ds-vb1">
                                                     <rect key="frame" x="4" y="88" width="80" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -205,6 +199,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdj-b8-hTj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2896.9465648854962" y="-1191.549295774648"/>
+        </scene>
+        <!--BagsVC-->
+        <scene sceneID="4zq-Ez-CXX">
+            <objects>
+                <viewController storyboardIdentifier="BagsVC" id="QSz-eO-Crg" customClass="BagsVC" customModule="TiklaMarket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pdc-uQ-IPv">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vT-XU-BhS">
+                                <rect key="frame" x="-84" y="0.0" width="560" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tDa-1f-AXB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GQo-pe-Lm7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3821" y="-1180"/>
         </scene>
         <!--Profil-->
         <scene sceneID="yG0-K1-UNO">
@@ -1006,18 +1025,7 @@
                         <viewLayoutGuide key="safeArea" id="NRf-pA-anO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Adreslerim" id="HRB-BW-FoU">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="jq9-eQ-tKr">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DHq-nw-TR0">
-                                <rect key="frame" x="290" y="4.6666666666666679" width="87" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title="">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Adreslerim" id="HRB-BW-FoU"/>
                     <connections>
                         <outlet property="tableView" destination="EUI-lx-zny" id="RTK-2F-qCu"/>
                     </connections>
@@ -1069,11 +1077,12 @@
                     <navigationItem key="navigationItem" title="Yeni Adres Ekle" id="csO-Qg-Opv"/>
                     <connections>
                         <outlet property="mapView" destination="YTz-C5-Vp4" id="rVq-tb-yuX"/>
+                        <outlet property="saveButton" destination="cd6-7K-ghS" id="zJh-Hs-58f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qX-Ap-QKq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4988.5496183206105" y="1567.605633802817"/>
+            <point key="canvasLocation" x="5915.2671755725187" y="1567.605633802817"/>
         </scene>
         <!--Yeni Adres Ekle-->
         <scene sceneID="THj-Ke-sDZ">
@@ -1200,7 +1209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T56-zz-OAU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7083.2061068702287" y="1567.605633802817"/>
+            <point key="canvasLocation" x="8009.9236641221369" y="1567.605633802817"/>
         </scene>
         <!--Hesap Yönetimi-->
         <scene sceneID="9An-K2-nuS">
@@ -1318,24 +1327,6 @@
             <point key="canvasLocation" x="58.778625954198468" y="674.64788732394368"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="ozh-SP-ifj">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ILB-5y-yC9" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SJ5-0a-bpq">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5So-Ig-G1L" kind="relationship" relationship="rootViewController" id="PbS-20-RdP"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vvs-Hb-8If" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4061.8320610687019" y="1567.605633802817"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="J1b-Q1-JdU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LZJ-yW-7ZK" sceneMemberID="viewController">
@@ -1351,11 +1342,29 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="04f-9f-Zoz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6156.4885496183206" y="1567.605633802817"/>
+            <point key="canvasLocation" x="7083.2061068702287" y="1567.605633802817"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qVH-Bn-baJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Myu-jP-X3b" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QPV-9R-q0P">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5So-Ig-G1L" kind="relationship" relationship="rootViewController" id="rI5-ST-qlF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p4X-mS-Nk0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4988.5496183206105" y="1567.605633802817"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BS1-we-sqn"/>
+        <segue reference="VPE-Vr-jOI"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.zigzag.right.fill" catalog="system" width="128" height="92"/>
@@ -1369,7 +1378,6 @@
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="mappin.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <image name="trash.fill" catalog="system" width="119" height="128"/>
         <systemColor name="labelColor">

@@ -26,10 +26,11 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-               locationManager.delegate = self
-               locationManager.desiredAccuracy = kCLLocationAccuracyBest
-               locationManager.requestWhenInUseAuthorization()
-               locationManager.startUpdatingLocation()
+        mapView.showsUserLocation = true
+        locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.requestWhenInUseAuthorization() // İzin iste
+                locationManager.startUpdatingLocation()
                
 
         
@@ -57,13 +58,28 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     
     
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-               let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-               let region = MKCoordinateRegion(center: location, span: span)
-               mapView.setRegion(region, animated: true)
-        }
+    // Kullanıcının konum güncellemeleri alındığında çağrılır
+       func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+           if let location = locations.last {
+               let latitude = location.coordinate.latitude
+               let longitude = location.coordinate.longitude
+               
+               // Konum bilgilerini kullanabilirsiniz
+               print("Latitude: \(latitude), Longitude: \(longitude)")
 
+               // Haritada kullanıcının konumunu merkezlemek için
+               let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+               mapView.setRegion(region, animated: true)
+           }
+       }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+           if status == .authorizedWhenInUse {
+               // İzin verildi, konum güncellemelerini başlat
+               locationManager.startUpdatingLocation()
+           } else {
+               // İzin reddedildi veya kullanıcı izin vermedi, uygun bir işlem yapabilirsiniz
+           }
+       }
       
     func fetchRealtimeDatabaseData() {
 

@@ -13,6 +13,7 @@ import XLPagerTabStrip
 
 class ProductVC: UIViewController {
     
+    @IBOutlet weak var goToCartButton: UIBarButtonItem!
     
     var databaseRef: DatabaseReference!
     var buttonTitles: [String] = []
@@ -57,11 +58,26 @@ class ProductVC: UIViewController {
         Task {
             await fetchRealtimeDatabaseData()
         }
-
+        
+        // Özel bir buton oluşturun
+            let cartButton = UIBarButtonItem(title: "Sepet", style: .plain, target: self, action: #selector(goToCartButtonTapped))
+            
+            // Butonu navigationItem'a ekleyin
+            navigationItem.rightBarButtonItem = cartButton
+        
+        
         fetchButtonData()
     }
  
-
+    @objc func goToCartButtonTapped() {
+         // Sepet sayfasına yönlendirme işlemi
+         // Örnek olarak, "CartViewController" adlı bir sayfaya yönlendiriyoruz
+         if let cartViewController = storyboard?.instantiateViewController(withIdentifier: "BagsVC") as? BagsVC {
+             navigationController?.pushViewController(cartViewController, animated: true)
+         }
+     }
+    
+    
     func fetchRealtimeDatabaseData() async{
         do{
             print("CLICKED ",self.selectedCategory?.id as Any)

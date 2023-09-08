@@ -46,7 +46,7 @@ class ProfileVC: UIViewController {
        
         
       
-        print("test\(email!)")
+       print("test\(email!)")
         
         DispatchQueue.main.async {
             self.emailLabel.text = email

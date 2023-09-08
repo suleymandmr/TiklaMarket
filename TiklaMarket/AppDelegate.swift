@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  TiklaMarket
-//
-//  Created by eyüp yaşar demir on 15.08.2023.
-//
 
 import UIKit
 import CoreData
