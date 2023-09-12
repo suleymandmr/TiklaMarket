@@ -103,21 +103,12 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
         address.apartmentNumber = newApartmentNumberText
         address.floor           = newFlourText
         address.district        = newStreetText
-    
+            
         let ref = Database.database().reference()
         let userRef = ref.child("Users/"+UserModel.shared.uid+"/address").childByAutoId()
-        userRef.updateChildValues(address.getAllData())
+        userRef.setValue(address.toDictionnary)
         //print("DATAAA ",userRef.key)
         
-        /*
-        userRef.updateChildValues(["adres_baslik": newTitleText,"adres_tarifi": newDirectionsText, "bina_no": newBuildText, "daire_no" : newApartmentNumberText, "kat": newFlourText, "mahalle_cadde_sokak": newStreetText, "adresTip" : addressType ]) { (error, ref) in
-            if let error = error {
-                print("Veri güncelleme hatası: \(error.localizedDescription)")
-            } else {
-                print("Veri başarıyla güncellendi.")
-            }
-        }
-        */
     }
 }
 extension NewAddressDetailVC {

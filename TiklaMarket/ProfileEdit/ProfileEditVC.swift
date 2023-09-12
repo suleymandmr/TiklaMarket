@@ -13,11 +13,8 @@ import FirebaseAuth
 class ProfileEditVC: UIViewController {
     
     @IBOutlet weak var nameSurnameText: UITextField!
-    
     @IBOutlet weak var emailText: UITextField!
-    
     @IBOutlet weak var phoneNumberText: UITextField!
-    var currentUserID: String?
     
     
     override func viewDidLoad() {
@@ -42,12 +39,9 @@ class ProfileEditVC: UIViewController {
         
     }
     func fetchUserProfile() {
-        guard let userID = self.currentUserID else {
-            return
-        }
         let ref = Database.database().reference()
         
-        ref.child("Users").child(userID).observeSingleEvent(of: .value) { (snapshot, error) in
+        ref.child("Users").child(UserModel.shared.uid).observeSingleEvent(of: .value) { (snapshot, error) in
             if let userData = snapshot.value as? [String: Any] {
                 self.emailText.text = userData["email"] as? String
                 self.phoneNumberText.text = userData["phonenumber"] as? String
@@ -60,16 +54,10 @@ class ProfileEditVC: UIViewController {
         }
     }
     
-    
-    
-    
-    
-    
     @IBAction func SaveClicked(_ sender: Any) {
         guard let newEmail = emailText.text,
               let newNameSurname = nameSurnameText.text,
-              let newPhoneNumber = phoneNumberText.text,
-              let userID = self.currentUserID else {
+              let newPhoneNumber = phoneNumberText.text else {
             return
         }
         
@@ -83,7 +71,7 @@ class ProfileEditVC: UIViewController {
                 
                 // Email güncellendiyse, veritabanındaki kullanıcı bilgilerini güncelle
                 let ref = Database.database().reference()
-                let userRef = ref.child("Users").child(userID)
+                let userRef = ref.child("Users").child(UserModel.shared.uid)
                 userRef.updateChildValues(["namesurname": newNameSurname, "email": newEmail, "phonenumber": newPhoneNumber]) { (error, ref) in
                     if let error = error {
                         print("Veri güncelleme hatası: \(error.localizedDescription)")

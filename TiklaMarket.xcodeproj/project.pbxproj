@@ -13,7 +13,6 @@
 		1025944B2A8B508A00F2711D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102594492A8B508A00F2711D /* Main.storyboard */; };
 		1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */; };
 		102594502A8B508B00F2711D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1025944F2A8B508B00F2711D /* Assets.xcassets */; };
-		102594532A8B508B00F2711D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102594512A8B508B00F2711D /* LaunchScreen.storyboard */; };
 		1025945B2A8B52F600F2711D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1025945A2A8B52F600F2711D /* GoogleService-Info.plist */; };
 		103548D52A94E64D0025B8FF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103548D42A94E64D0025B8FF /* Button.swift */; };
 		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
@@ -39,6 +38,11 @@
 		10D261362AA08C8300460AE2 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D261352AA08C8300460AE2 /* RegisterVC.swift */; };
 		10DC25E12A94AA850059B843 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC25E02A94AA850059B843 /* Api.swift */; };
 		10E04E4E2A8FA0340048668C /* categoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E04E4D2A8FA0340048668C /* categoryCell.swift */; };
+		10F11F0F2AB07DFE009EC633 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F11F0D2AB07DFE009EC633 /* UserModel.swift */; };
+		10F11F102AB07DFE009EC633 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F11F0E2AB07DFE009EC633 /* AddressModel.swift */; };
+		10F11F152AB07E74009EC633 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F11F122AB07E74009EC633 /* Constants.swift */; };
+		10F11F162AB07E74009EC633 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F11F132AB07E74009EC633 /* KeychainHelper.swift */; };
+		10F11F172AB07E74009EC633 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F11F142AB07E74009EC633 /* Extensions.swift */; };
 		2A57045D310E760B5BCAEE80 /* Pods_TiklaMarket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +54,6 @@
 		1025944A2A8B508A00F2711D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1025944D2A8B508A00F2711D /* TiklaMarket.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TiklaMarket.xcdatamodel; sourceTree = "<group>"; };
 		1025944F2A8B508B00F2711D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		102594522A8B508B00F2711D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		102594542A8B508B00F2711D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1025945A2A8B52F600F2711D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		103548D42A94E64D0025B8FF /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Button.swift; path = ../../../../../Documents/Button.swift; sourceTree = "<group>"; };
@@ -77,6 +80,11 @@
 		10D261352AA08C8300460AE2 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		10DC25E02A94AA850059B843 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		10E04E4D2A8FA0340048668C /* categoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryCell.swift; sourceTree = "<group>"; };
+		10F11F0D2AB07DFE009EC633 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		10F11F0E2AB07DFE009EC633 /* AddressModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
+		10F11F122AB07E74009EC633 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		10F11F132AB07E74009EC633 /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		10F11F142AB07E74009EC633 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		38CA214B9A86DDA04A894130 /* Pods-TiklaMarket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.release.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.release.xcconfig"; sourceTree = "<group>"; };
 		476F371C70220172DCD07AEB /* Pods-TiklaMarket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TiklaMarket.debug.xcconfig"; path = "Target Support Files/Pods-TiklaMarket/Pods-TiklaMarket.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D9207068C0377191E429C3 /* Pods_TiklaMarket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TiklaMarket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +131,8 @@
 		102594422A8B508A00F2711D /* TiklaMarket */ = {
 			isa = PBXGroup;
 			children = (
+				10F11F112AB07E74009EC633 /* Helpers */,
+				10F11F0C2AB07DFE009EC633 /* Models */,
 				104BB3152AAA6CD60087296B /* ShoppingBags */,
 				10741A472AA9E58C00998377 /* NewAddress */,
 				100D18CA2AA5F97100C50B38 /* ProfileEdit */,
@@ -134,12 +144,10 @@
 				10BDF6E92A962D740058E72E /* ProductDetail */,
 				10577A572A8CD88500DC15E1 /* Product */,
 				104538572A8B654F0076624E /* Main */,
-				102594432A8B508A00F2711D /* AppDelegate.swift */,
-				10DC25E02A94AA850059B843 /* Api.swift */,
-				102594452A8B508A00F2711D /* SceneDelegate.swift */,
+				10C95B132AB09C6C00D47792 /* Api */,
+				10C95B142AB09C7E00D47792 /* Delegate */,
 				102594492A8B508A00F2711D /* Main.storyboard */,
 				1025944F2A8B508B00F2711D /* Assets.xcassets */,
-				102594512A8B508B00F2711D /* LaunchScreen.storyboard */,
 				102594542A8B508B00F2711D /* Info.plist */,
 				1025945A2A8B52F600F2711D /* GoogleService-Info.plist */,
 				1025944C2A8B508A00F2711D /* TiklaMarket.xcdatamodeld */,
@@ -240,6 +248,42 @@
 			path = ProductDetail;
 			sourceTree = "<group>";
 		};
+		10C95B132AB09C6C00D47792 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				10DC25E02A94AA850059B843 /* Api.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		10C95B142AB09C7E00D47792 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				102594432A8B508A00F2711D /* AppDelegate.swift */,
+				102594452A8B508A00F2711D /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		10F11F0C2AB07DFE009EC633 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				10F11F0D2AB07DFE009EC633 /* UserModel.swift */,
+				10F11F0E2AB07DFE009EC633 /* AddressModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		10F11F112AB07E74009EC633 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				10F11F122AB07E74009EC633 /* Constants.swift */,
+				10F11F132AB07E74009EC633 /* KeychainHelper.swift */,
+				10F11F142AB07E74009EC633 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		412E113CD06439712B078E89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +361,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				102594532A8B508B00F2711D /* LaunchScreen.storyboard in Resources */,
 				1025945B2A8B52F600F2711D /* GoogleService-Info.plist in Resources */,
 				102594502A8B508B00F2711D /* Assets.xcassets in Resources */,
 				1025944B2A8B508A00F2711D /* Main.storyboard in Resources */,
@@ -376,16 +419,19 @@
 				108E98222AA068F100CFFB00 /* LoginVC.swift in Sources */,
 				10741A462AA9E57300998377 /* AddressCell.swift in Sources */,
 				10BDF6ED2A962E070058E72E /* ProductDetail.swift in Sources */,
+				10F11F0F2AB07DFE009EC633 /* UserModel.swift in Sources */,
 				104538592A8B65880076624E /* MainCollectionVC.swift in Sources */,
 				10C0B5442A936264005A4CDD /* MainCollectionViewController.swift in Sources */,
 				10AC291A2A8E91B60005901C /* ProductVC.swift in Sources */,
 				104538562A8B65110076624E /* MainVC.swift in Sources */,
 				10D261362AA08C8300460AE2 /* RegisterVC.swift in Sources */,
+				10F11F152AB07E74009EC633 /* Constants.swift in Sources */,
 				10741A442AA9E52A00998377 /* Address.swift in Sources */,
 				10C594252A8F547C001C54EF /* MyDataModel.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				10894EEE2A9E191E00270B8D /* ManagementVC.swift in Sources */,
 				10DC25E12A94AA850059B843 /* Api.swift in Sources */,
+				10F11F102AB07DFE009EC633 /* AddressModel.swift in Sources */,
 				104BB3172AAA6D230087296B /* BagsVC.swift in Sources */,
 				102594442A8B508A00F2711D /* AppDelegate.swift in Sources */,
 				10AC29202A8E96970005901C /* Product.swift in Sources */,
@@ -397,9 +443,11 @@
 				10AC291E2A8E95750005901C /* ProductCollectionVC.swift in Sources */,
 				10894EF42A9E199000270B8D /* PastOrdersVC.swift in Sources */,
 				10BDF6EB2A962DC90058E72E /* ProductDetailVC.swift in Sources */,
+				10F11F162AB07E74009EC633 /* KeychainHelper.swift in Sources */,
 				10894EF12A9E195B00270B8D /* AddressVC.swift in Sources */,
 				1045385B2A8B659E0076624E /* Category.swift in Sources */,
 				10741A422AA9CF6500998377 /* NewAddressDetailVC.swift in Sources */,
+				10F11F172AB07E74009EC633 /* Extensions.swift in Sources */,
 				102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,14 +461,6 @@
 				1025944A2A8B508A00F2711D /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		102594512A8B508B00F2711D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				102594522A8B508B00F2711D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

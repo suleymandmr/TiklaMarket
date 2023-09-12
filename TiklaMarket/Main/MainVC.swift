@@ -56,12 +56,24 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                     print("USER ",user.email," ",user.uid)
                     UserModel.shared = user
                     
-                    /*let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
-                    let password = String(data: data!, encoding: .utf8)!
-                    print(password)*/
+                    let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
+                    let userPassword = String(data: data!, encoding: .utf8)!
+                    print("BILGILER ",userPassword," ",user.email)
                     
+                    Auth.auth().signIn(withEmail: user.email, password:userPassword) {(authResult, error) in
+                        if error != nil {
+                           print("hata")
+                            
+                            UserModel.shared = UserModel()
+                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+                            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userData.rawValue)
+                            
+                           
+                        
+                         }
+                        print("KULLANICI ",authResult)
+                     }
 
-                    
                 } catch {
                     print("Unable to Decode Note (\(error))")
                 }

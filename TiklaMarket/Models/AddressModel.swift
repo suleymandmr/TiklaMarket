@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 
 class AddressModel:Codable{
+    
     var type                              = AddressType.home.rawValue
     var latitude:CLLocationDegrees        = 0
     var longitude:CLLocationDegrees       = 0
@@ -19,7 +20,16 @@ class AddressModel:Codable{
     var floor                             = ""
     var district                          = ""
     
-    func getAllData(){
-        return ["type":type]
+    func getAllData() -> Array<Any>{
+        return []
     }
+}
+
+extension AddressModel{
+    var toDictionnary: [String : Any]? {
+          guard let data =  try? JSONEncoder().encode(self) else {
+              return nil
+          }
+          return try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+      }
 }

@@ -592,6 +592,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="SaveClicked:" destination="TXO-1r-Qjf" eventType="touchUpInside" id="0Sx-hJ-jjL"/>
+                                    <segue destination="Blm-Wh-3dn" kind="presentation" modalPresentationStyle="fullScreen" id="hSC-9D-9dc"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Cep Telefonu" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uZb-v9-nM9">
@@ -1369,6 +1370,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="VPE-Vr-jOI"/>
+        <segue reference="hSC-9D-9dc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.zigzag.right.fill" catalog="system" width="128" height="92"/>
