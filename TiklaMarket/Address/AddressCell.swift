@@ -1,19 +1,15 @@
-//
-//  AddressCell.swift
-//  TiklaMarket
-//
-//  Created by eyüp yaşar demir on 7.09.2023.
-//
-
 import UIKit
-
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 class AddressCell: UITableViewCell {
-
-    
+    var dataIDToDelete: String?
+  
     @IBOutlet weak var addressImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    
+   
+    @IBOutlet weak var deleteButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,5 +35,22 @@ class AddressCell: UITableViewCell {
             detayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),*/
         //])
     }
-
+    @IBAction func DeleteButtonClicked(_ sender: Any) {
+        
+        
+        let ref = Database.database().reference().child("Users/"+UserModel.shared.uid+"/address")
+        
+        // Veriyi silme işlemi
+        ref.removeValue { (error, _) in
+            if let error = error {
+                print("Veri silme hatası: \(error.localizedDescription)")
+            } else {
+                print("Veri başarıyla silindi.")
+             
+                
+            }
+        }
+        
+    }
+    
 }

@@ -77,25 +77,14 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBAction func addPinButtonClicked(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // Eğer farklı bir storyboard kullanıyorsanız onun adını verin
         if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
+            secondViewController.address.latitude = selectedPinCoordinate!.latitude
+            secondViewController.address.longitude = selectedPinCoordinate!.longitude
+        
             navigationController?.pushViewController(secondViewController, animated: true)
             tabBarController?.tabBar.tabsVisiblty(false)
             
         }
-        guard let coordinate = selectedPinCoordinate else {
-                  return // Eğer seçili bir pin yoksa kaydetmeyi denemeyin
-              }
-              
-              // Pin'in konumunu Firebase'e kaydedin
-              let pinData = ["latitude": coordinate.latitude, "longitude": coordinate.longitude]
-              databaseRef.child("pins").childByAutoId().setValue(pinData) { (error, _) in
-                  if let error = error {
-                      print("Hata: \(error.localizedDescription)")
-                  } else {
-                      print("Pin başarıyla Firebase'e kaydedildi.")
-                  }
-              }
-              
-              // "Kaydet" butonunu tekrar gizleyin
+
              
           
         }

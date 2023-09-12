@@ -27,11 +27,36 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func registerClicked(_ sender: Any) {
+
         if emailText.text != "" && passwordText.text != "" {
             Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!) { (authdata, error) in
                 if error != nil {
+                    
                     self.makeAlert(titleInput: "Error", messageInput: error?.localizedDescription ?? "Error")
                 }else{
+                    
+                    
+                    // Realtime Database referansı3
+                    let realtimeDatabaseRef = Database.database().reference()
+
+                    // Firestore veri yapısını hazırlayın
+                    let firestorePost = [
+                                
+                                    "namesurname": self.nameText.text!,
+                                    "email": self.emailText.text!,
+                                    "phone_country_code": self.countryText.text!,
+                                    "phonenumber": self.phoneText.text!
+                                ]as [String: Any]
+                                
+                                
+                    realtimeDatabaseRef.child("Users").child(authdata!.user.uid).setValue(firestorePost) { (error, ref) in
+                        if let error = error {
+                            self.makeAlert(titleInput: "Error!", messageInput: error.localizedDescription)
+                        } else {
+                            // Başarıyla eklendiğinde yapılacak işlemler
+                        }
+                    }
+                    
                     self.performSegue(withIdentifier: "toCreateUser", sender: nil)
                 }
             }
@@ -41,26 +66,6 @@ class RegisterVC: UIViewController {
         
        
 
-        // Realtime Database referansı3
-        let realtimeDatabaseRef = Database.database().reference()
-
-        // Firestore veri yapısını hazırlayın
-        let firestorePost = [
-                    
-                        "namesurname": self.nameText.text!,
-                        "email": self.emailText.text!,
-                        "phone_country_code": self.countryText.text!,
-                        "phonenumber": self.phoneText.text!
-                    ]as [String: Any]
-                    
-                    
-        realtimeDatabaseRef.child("Users").childByAutoId().setValue(firestorePost) { (error, ref) in
-            if let error = error {
-                self.makeAlert(titleInput: "Error!", messageInput: error.localizedDescription)
-            } else {
-                // Başarıyla eklendiğinde yapılacak işlemler
-            }
-        }
             
         }
     

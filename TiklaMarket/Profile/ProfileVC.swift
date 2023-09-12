@@ -22,7 +22,7 @@ class ProfileVC: UIViewController {
     var didRedirectToProfile = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        /*Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 // Kullanıcı oturum açmışsa, kullanıcının kimliğini alıyoruz
                 self.currentUserID = user.uid
@@ -34,28 +34,17 @@ class ProfileVC: UIViewController {
                 self.navigateToLogin()
             }
         }
-        profile()
+        profile()*/
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        phoneNumberLabel.text = UserModel.shared.phoneNumber
+        nameSurnameLabel.text = UserModel.shared.nameSurname
+        emailLabel.text = UserModel.shared.email
     }
 
-    func profile() {
-        ref = Database.database().reference().child("Users")
-        let key = ref.childByAutoId().key
-        let email = Auth.auth().currentUser?.email
-        
    
-       
-        
-      
-       print("test\(email!)")
-        
-        DispatchQueue.main.async {
-            self.emailLabel.text = email
-            
-     
-        }
-        
-    }
-
 
     
     /*

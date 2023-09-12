@@ -12,6 +12,7 @@ import FirebaseStorage
 import MapKit
 import CoreLocation
 import FirebaseDatabase
+import CoreData
 
 class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     var ref: DatabaseReference!
@@ -31,9 +32,6 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                 locationManager.desiredAccuracy = kCLLocationAccuracyBest
                 locationManager.requestWhenInUseAuthorization() // İzin iste
                 locationManager.startUpdatingLocation()
-               
-
-        
         let layout = UICollectionViewFlowLayout()
         let cellWidth: CGFloat = 80 // Sabit genişlik değeri
         let cellHeight: CGFloat = 120 // Sabit yükseklik değeri
@@ -41,22 +39,40 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         collectionView.collectionViewLayout = layout
-        
-        
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.allowsSelection = true
         fetchRealtimeDatabaseData()
-        
-        
-        
-        
-       
+        checkUser()
     }
- 
     
+    func checkUser(){
     
+        if(UserDefaults.standard.isLoggedIn()){
+            if let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.userData.rawValue) {
+                do {
+                    let decoder = JSONDecoder()
+                    let user = try decoder.decode(UserModel.self, from: data)
+                    print("USER ",user.email," ",user.uid)
+                    UserModel.shared = user
+                    
+                    /*let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
+                    let password = String(data: data!, encoding: .utf8)!
+                    print(password)*/
+                    
+
+                    
+                } catch {
+                    print("Unable to Decode Note (\(error))")
+                }
+            }
+     
+        } else {
+            print("VERISI YOK ")
+        
+        }
+        
+    }
     
     // Kullanıcının konum güncellemeleri alındığında çağrılır
        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -72,14 +88,15 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                mapView.setRegion(region, animated: true)
            }
        }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-           if status == .authorizedWhenInUse {
-               // İzin verildi, konum güncellemelerini başlat
-               locationManager.startUpdatingLocation()
-           } else {
-               // İzin reddedildi veya kullanıcı izin vermedi, uygun bir işlem yapabilirsiniz
-           }
+       if status == .authorizedWhenInUse {
+           // İzin verildi, konum güncellemelerini başlat
+           locationManager.startUpdatingLocation()
+       } else {
+           // İzin reddedildi veya kullanıcı izin vermedi, uygun bir işlem yapabilirsiniz
        }
+   }
       
     func fetchRealtimeDatabaseData() {
 

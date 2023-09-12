@@ -17,30 +17,65 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         initializeHideKeyboard()
     }
     
 
     @IBAction func loginClicked(_ sender: Any) {
         guard let email = emailText.text, !email.isEmpty,
+              
                let password = passwordText.text, !password.isEmpty else {
              makeAlert(titleInput: "Error", messageInput: "Username/Password")
              return
          }
 
-         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { [self] (authResult, error) in
              if let error = error {
                  self.makeAlert(titleInput: "Error", messageInput: error.localizedDescription)
                print("hata")
                  
              } else {
-                 self.performSegue(withIdentifier: "toMainVC", sender: nil)
-                 
-                 
+                 self.saveUser(uid: Auth.auth().currentUser!.uid)
                  print("Kullanıcı oturum açtı, UID: \(email)")
              }
          }
+    }
+    
+    func saveUser(uid:String){
+        let ref = Database.database().reference()
+        
+        ref.child("Users").child(uid).observeSingleEvent(of: .value) { (snapshot, error) in
+            if let userData = snapshot.value as? [String: Any] {
+                
+                do {
+                    UserModel.shared.uid = uid
+                    UserModel.shared.email = self.emailText.text!
+                    UserModel.shared.phoneNumber =  userData["phonenumber"] as! String
+                    UserModel.shared.nameSurname = userData["namesurname"] as! String
+                    let encoder = JSONEncoder()
+                    let user = try encoder.encode(UserModel.shared)
+                  
+                    //save user data & password
+                    UserDefaults.standard.setLoggedIn(value: true)
+                    UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+                    //pass
+                    let data = Data(self.passwordText.text!.utf8)
+                    KeychainHelper.save(data, label: KeyChainKeys.password.rawValue)
+
+                    self.performSegue(withIdentifier: "toMainVC", sender: nil)
+                    print("PHONE ",userData["phonenumber"])
+    
+                } catch {
+                    print("Unable to Encode Note (\(error))")
+                }
+                
+            } else {
+                print("Kullanıcı verileri bulunamadı.")
+            }
+        } withCancel: { (error) in
+            print("Veri çekme hatası: \(error.localizedDescription)")
+        }
     }
     
     @IBAction func registerClicked(_ sender: Any) {

@@ -9,8 +9,7 @@ import FirebaseDatabase
 
 
 class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManagerDelegate {
-    var addressType: String?
-    
+    let address = AddressModel()
     @IBOutlet weak var streetText: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var titleText: UITextField!
@@ -18,11 +17,12 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
     @IBOutlet weak var apartmentNumberText: UITextField!
     @IBOutlet weak var flourText: UITextField!
     @IBOutlet weak var buildText: UITextField!
+    
     let locationManager = CLLocationManager()
     var currentUserID: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initializeHideKeyboard()
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
@@ -37,12 +37,17 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
                 self.currentUserID = user.uid
                 
                 // Kullanıcının profil verilerini çekiyoruz ve ekranda gösteriyoruz
-                self.fetchUserProfile()
+      
             } else {
                 // Kullanıcı oturum açmamışsa, uygun bir şekilde yönlendirme yapabiliriz.
                 print("Kullanıcı oturum açmamış.")
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("SAYFA GELDİ 1 ",address )
+        print("SAYFA GELDİ ",address.latitude," ",address.longitude)
     }
     
     // Kullanıcının konum güncellemeleri alındığında çağrılır
@@ -67,34 +72,12 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
                // İzin reddedildi veya kullanıcı izin vermedi, uygun bir işlem yapabilirsiniz
            }
        }
-    func fetchUserProfile() {
-        
-        guard let userID = self.currentUserID else {
-            return
-        }
-        let ref = Database.database().reference()
-        ref.child("Addresses").child(userID).observeSingleEvent(of: .value) { (snapshot, error) in
-            if let userData = snapshot.value as? [String: Any] {
-                self.titleText.text = userData["adres_baslik"] as? String
-                self.directionsText.text = userData["adres_tarifi"] as? String
-                self.buildText.text = userData["bina_no"] as? String
-                self.apartmentNumberText.text = userData["daire_no"] as? String
-                self.flourText.text = userData["kat"] as? String
-                self.streetText.text = userData["mahalle_cadde_sokak"] as? String
-                
-            } else {
-                print("Kullanıcı verileri bulunamadı.")
-            }
-        } withCancel: { (error) in
-            print("Veri çekme hatası: \(error.localizedDescription)")
-        }
-    }
     
     @IBAction func buildingClicked(_ sender: Any) {
-        addressType = "iş"
+        address.type = AddressType.office.rawValue
     }
     @IBAction func homeClicked(_ sender: Any) {
-        addressType = "ev"
+        address.type = AddressType.home.rawValue
     }
     
     
@@ -110,13 +93,23 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
               let newBuildText = buildText.text,
               let newApartmentNumberText = apartmentNumberText.text,
               let newFlourText = flourText.text,
-              let newStreetText = streetText.text,
-              let addressType = addressType,
-              let userID = self.currentUserID else {
+              let newStreetText = streetText.text else {
             return
         }
+        
+        address.title           = newTitleText
+        address.description     = newDirectionsText
+        address.buildingNumber  = newBuildText
+        address.apartmentNumber = newApartmentNumberText
+        address.floor           = newFlourText
+        address.district        = newStreetText
+    
         let ref = Database.database().reference()
-        let userRef = ref.child("Addresses").child(userID)
+        let userRef = ref.child("Users/"+UserModel.shared.uid+"/address").childByAutoId()
+        userRef.updateChildValues(address.getAllData())
+        //print("DATAAA ",userRef.key)
+        
+        /*
         userRef.updateChildValues(["adres_baslik": newTitleText,"adres_tarifi": newDirectionsText, "bina_no": newBuildText, "daire_no" : newApartmentNumberText, "kat": newFlourText, "mahalle_cadde_sokak": newStreetText, "adresTip" : addressType ]) { (error, ref) in
             if let error = error {
                 print("Veri güncelleme hatası: \(error.localizedDescription)")
@@ -124,5 +117,24 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
                 print("Veri başarıyla güncellendi.")
             }
         }
+        */
+    }
+}
+extension NewAddressDetailVC {
+
+    func initializeHideKeyboard(){
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+
+        //Add this tap gesture recognizer to the parent view
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissMyKeyboard(){
+        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+        //In short- Dismiss the active keyboard.
+        view.endEditing(true)
     }
 }

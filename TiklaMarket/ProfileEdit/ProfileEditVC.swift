@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class ProfileEditVC: UIViewController {
     
@@ -21,7 +22,12 @@ class ProfileEditVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        initializeHideKeyboard()
+        
+        phoneNumberText.text = UserModel.shared.phoneNumber
+        nameSurnameText.text = UserModel.shared.nameSurname
+        emailText.text = UserModel.shared.email
+        /*Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 // Kullanıcı oturum açmışsa, kullanıcının kimliğini alıyoruz
                 self.currentUserID = user.uid
@@ -32,7 +38,7 @@ class ProfileEditVC: UIViewController {
                 // Kullanıcı oturum açmamışsa, uygun bir şekilde yönlendirme yapabiliriz.
                 print("Kullanıcı oturum açmamış.")
             }
-        }
+        }*/
         
     }
     func fetchUserProfile() {
@@ -87,5 +93,23 @@ class ProfileEditVC: UIViewController {
                 }
             }
         }
+    }
+}
+extension ProfileEditVC {
+
+    func initializeHideKeyboard(){
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+
+        //Add this tap gesture recognizer to the parent view
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissMyKeyboard(){
+        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+        //In short- Dismiss the active keyboard.
+        view.endEditing(true)
     }
 }

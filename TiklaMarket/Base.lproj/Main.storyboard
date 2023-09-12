@@ -783,7 +783,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vq-BP-UMC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3073" y="675"/>
+            <point key="canvasLocation" x="3072.5190839694656" y="674.64788732394368"/>
         </scene>
         <!--Arama-->
         <scene sceneID="Lgf-fV-TN8">
@@ -995,11 +995,15 @@
                                                     <color key="tintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="0.70985796590000005" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="DeleteButtonClicked:" destination="s5v-CC-bmc" eventType="touchUpInside" id="tOx-5p-KBo"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressImageView" destination="HFw-AM-GVa" id="Ess-Mr-7IK"/>
+                                            <outlet property="deleteButton" destination="kI5-U5-S0f" id="Bce-vP-WVv"/>
                                             <outlet property="locationLabel" destination="ICs-Gu-n5i" id="Ol7-Si-Lc7"/>
                                             <outlet property="titleLabel" destination="22E-xM-Dfe" id="a0j-G8-Fsl"/>
                                         </connections>
@@ -1051,7 +1055,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YTz-C5-Vp4">
-                                <rect key="frame" x="0.0" y="103" width="393" height="641"/>
+                                <rect key="frame" x="0.0" y="103" width="428" height="641"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
@@ -1093,7 +1097,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAN-WF-gS5">
-                                <rect key="frame" x="0.0" y="102" width="393" height="137"/>
+                                <rect key="frame" x="0.0" y="102" width="426" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
