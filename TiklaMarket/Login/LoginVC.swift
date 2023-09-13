@@ -23,6 +23,7 @@ class LoginVC: UIViewController {
     
 
     @IBAction func loginClicked(_ sender: Any) {
+          
         guard let email = emailText.text, !email.isEmpty,
               
                let password = passwordText.text, !password.isEmpty else {
@@ -79,6 +80,14 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func registerClicked(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.performSegue(withIdentifier: "toNewLoginVC", sender: nil)
+            
+        } catch {
+            print("error")
+        }
+        
        
     }
     

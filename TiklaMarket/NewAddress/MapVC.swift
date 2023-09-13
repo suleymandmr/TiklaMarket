@@ -58,19 +58,20 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @objc func addPin(_ gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state == .began {
-                   let touchPoint = gestureRecognizer.location(in: mapView)
-                   let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-                   
-                   // Pin oluşturun ve haritaya ekleyin
-                   let pin = MKPointAnnotation()
-                   pin.coordinate = coordinate
-                   mapView.addAnnotation(pin)
-                   
-                   // Seçilen pin'in koordinatlarını saklayın
-                   selectedPinCoordinate = coordinate
-                   
-                   // "Kaydet" butonunu görünür yapın
-                   
+                let touchPoint = gestureRecognizer.location(in: mapView)
+                let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+                
+                // Mevcut tüm pinleri kaldır
+                mapView.removeAnnotations(mapView.annotations)
+                
+                // Yeni pin oluşturun ve haritaya ekleyin
+                let pin = MKPointAnnotation()
+                pin.coordinate = coordinate
+                mapView.addAnnotation(pin)
+                
+                // Seçilen pin'in koordinatlarını saklayın
+                selectedPinCoordinate = coordinate
+                
                }
       }
     

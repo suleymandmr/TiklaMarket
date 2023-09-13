@@ -2,13 +2,15 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+
 class AddressCell: UITableViewCell {
     var dataIDToDelete: String?
   
     @IBOutlet weak var addressImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-   
+    var databaseReference: DatabaseReference!
+    
     @IBOutlet weak var deleteButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,22 +37,14 @@ class AddressCell: UITableViewCell {
             detayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),*/
         //])
     }
-    @IBAction func DeleteButtonClicked(_ sender: Any) {
-        
-        
-        let ref = Database.database().reference().child("Users/"+UserModel.shared.uid+"/address")
-        
-        // Veriyi silme işlemi
-        ref.removeValue { (error, _) in
-            if let error = error {
-                print("Veri silme hatası: \(error.localizedDescription)")
-            } else {
-                print("Veri başarıyla silindi.")
-             
-                
-            }
-        }
-        
-    }
+    
+    func configureCell(forAddressType addressType: AddressType) {
+          switch addressType {
+          case .home:
+              addressImageView.image = UIImage(named: "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png")
+          case .office:
+              addressImageView.image = UIImage(named: "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png")
+          }
+      }
     
 }

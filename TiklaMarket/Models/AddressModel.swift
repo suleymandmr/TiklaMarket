@@ -9,7 +9,8 @@ import Foundation
 import CoreLocation
 
 class AddressModel:Codable{
-    
+    static var shared = AddressModel()
+    var adressId                          = ""
     var type                              = AddressType.home.rawValue
     var latitude:CLLocationDegrees        = 0
     var longitude:CLLocationDegrees       = 0

@@ -525,7 +525,7 @@
                         <outlet property="nameText" destination="2ew-Lf-tsr" id="PjE-rP-VTi"/>
                         <outlet property="passwordText" destination="hgp-tv-A99" id="Lnr-5t-SMH"/>
                         <outlet property="phoneText" destination="ouN-xH-sdO" id="9DO-zQ-3Ds"/>
-                        <segue destination="9gX-N9-qTq" kind="presentation" identifier="toCreateUser" modalPresentationStyle="fullScreen" id="BS1-we-sqn"/>
+                        <segue destination="Blm-Wh-3dn" kind="presentation" identifier="toCreateUser" modalPresentationStyle="fullScreen" id="SeA-ZK-iwO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cco-fV-jWk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -693,7 +693,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="registerClicked:" destination="Blm-Wh-3dn" eventType="touchUpInside" id="nZC-19-Dsu"/>
-                                    <segue destination="ukC-9S-qdh" kind="show" id="Sxh-gZ-BAj"/>
+                                    <segue destination="ukC-9S-qdh" kind="show" identifier="toNewLoginVC" id="Sxh-gZ-BAj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Giriş" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w32-F7-Dn9">
@@ -991,20 +991,17 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kI5-U5-S0f">
-                                                    <rect key="frame" x="305" y="27" width="75" height="61"/>
+                                                    <rect key="frame" x="305" y="21" width="75" height="67"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="1" green="0.58431372550000005" blue="0.0" alpha="0.70985796590000005" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system"/>
-                                                    <connections>
-                                                        <action selector="DeleteButtonClicked:" destination="s5v-CC-bmc" eventType="touchUpInside" id="tOx-5p-KBo"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressImageView" destination="HFw-AM-GVa" id="Ess-Mr-7IK"/>
-                                            <outlet property="deleteButton" destination="kI5-U5-S0f" id="Bce-vP-WVv"/>
+                                            <outlet property="deleteButton" destination="kI5-U5-S0f" id="6b9-bj-uq0"/>
                                             <outlet property="locationLabel" destination="ICs-Gu-n5i" id="Ol7-Si-Lc7"/>
                                             <outlet property="titleLabel" destination="22E-xM-Dfe" id="a0j-G8-Fsl"/>
                                         </connections>
@@ -1369,8 +1366,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VPE-Vr-jOI"/>
-        <segue reference="hSC-9D-9dc"/>
+        <segue reference="SeA-ZK-iwO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.zigzag.right.fill" catalog="system" width="128" height="92"/>
