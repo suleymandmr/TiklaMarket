@@ -834,7 +834,7 @@
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-4O-cgm">
-                                <rect key="frame" x="0.0" y="326" width="405" height="443"/>
+                                <rect key="frame" x="0.0" y="316" width="405" height="453"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DEt-Cg-Ag7">
@@ -885,7 +885,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRx-dw-DiQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="-1191"/>
+            <point key="canvasLocation" x="1527.4809160305342" y="-1191.549295774648"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Fpd-Cs-IZi">
@@ -1241,6 +1241,7 @@
                                 <connections>
                                     <action selector="DetailButtonClicked:" destination="U06-pb-VXf" eventType="touchUpInside" id="PWF-Hl-Lfx"/>
                                     <action selector="deleteProfileClicked:" destination="6Pp-Bh-rK4" eventType="touchUpInside" id="fkf-fH-kTU"/>
+                                    <segue destination="Blm-Wh-3dn" kind="presentation" modalPresentationStyle="fullScreen" id="ahC-WQ-nrh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1366,7 +1367,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SeA-ZK-iwO"/>
+        <segue reference="ahC-WQ-nrh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.zigzag.right.fill" catalog="system" width="128" height="92"/>

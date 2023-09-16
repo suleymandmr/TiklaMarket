@@ -19,6 +19,12 @@ class ManagementVC: UIViewController {
     
 
     @IBAction func deleteProfileClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Eğer farklı bir storyboard kullanıyorsanız onun adını verin
+        if let secondViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
+            navigationController?.pushViewController(secondViewController, animated: true)
+            tabBarController?.tabBar.tabsVisiblty(false)
+            
+        }
         // Firebase Authentication'dan kullanıcıyı al
         if let user = Auth.auth().currentUser {
             // Firebase Authentication'dan hesabı sil
@@ -45,6 +51,7 @@ class ManagementVC: UIViewController {
                             // Hesap silindiğinde diğer işlemleri gerçekleştirin (örneğin, kullanıcıyı başka bir ekrana yönlendirme)
                         }
                     }
+                   
                 }
             }
         }

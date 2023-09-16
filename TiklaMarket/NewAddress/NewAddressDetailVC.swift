@@ -105,7 +105,7 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
         address.district        = newStreetText
         
         let ref = Database.database().reference()
-        let newAddressRef = ref.childByAutoId()
+        //let newAddressRef = ref.childByAutoId()
         let userRef = ref.child("Users/"+UserModel.shared.uid+"/address").childByAutoId()
         address.adressId = userRef.key!
         userRef.setValue(address.toDictionnary)
