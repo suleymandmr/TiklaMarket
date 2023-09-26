@@ -16,7 +16,7 @@ class ProductDetailVC: UIViewController {
     @IBOutlet weak var ProductDetailImageView: UIImageView!
     @IBOutlet weak var ProductDetailLabel: UILabel!
     @IBOutlet weak var ProductDetailPayLabel: UILabel!
-    
+    var shoppingCartItems: [CartItem] = []
     var selectedProduct : Product?
     
 
@@ -40,9 +40,14 @@ class ProductDetailVC: UIViewController {
             
         }
     }
-
+    
+    func addToCart(product: Product) {
+        //let cartItem = CartItem(name: ProductDetailLabel, price: product)
+        //shoppingCartItems.append(cartItem)
+    }
     @IBAction func DetailButtonClicked(_ sender: Any) {
-        
+        // Ürünü sepete eklemek için addToCart fonksiyonunu çağırın
+        addToCart(product: selectedProduct!)
     }
     
 

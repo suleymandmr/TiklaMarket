@@ -74,10 +74,10 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
        }
     
     @IBAction func buildingClicked(_ sender: Any) {
-        address.type = AddressType.office.rawValue
+        address.type = "https://cdn0.iconfinder.com/data/icons/online-shopping-fill-shoppers-features/512/Flash_sale-512.png"
     }
     @IBAction func homeClicked(_ sender: Any) {
-        address.type = AddressType.home.rawValue
+        address.type = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png"
     }
     
     

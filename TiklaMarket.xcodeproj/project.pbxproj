@@ -18,6 +18,8 @@
 		104538562A8B65110076624E /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538552A8B65110076624E /* MainVC.swift */; };
 		104538592A8B65880076624E /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104538582A8B65880076624E /* MainCollectionVC.swift */; };
 		1045385B2A8B659E0076624E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045385A2A8B659E0076624E /* Category.swift */; };
+		1049116F2AB644B800B4C608 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1049116E2AB644B700B4C608 /* CartItem.swift */; };
+		104911712AB644EB00B4C608 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104911702AB644EB00B4C608 /* CartItemCell.swift */; };
 		104BB3172AAA6D230087296B /* BagsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BB3162AAA6D230087296B /* BagsVC.swift */; };
 		10741A402AA9ACB000998377 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10741A3F2AA9ACB000998377 /* MapVC.swift */; };
 		10741A422AA9CF6500998377 /* NewAddressDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10741A412AA9CF6500998377 /* NewAddressDetailVC.swift */; };
@@ -60,6 +62,8 @@
 		104538552A8B65110076624E /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		104538582A8B65880076624E /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		1045385A2A8B659E0076624E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		1049116E2AB644B700B4C608 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
+		104911702AB644EB00B4C608 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		104BB3162AAA6D230087296B /* BagsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagsVC.swift; sourceTree = "<group>"; };
 		10741A3F2AA9ACB000998377 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		10741A412AA9CF6500998377 /* NewAddressDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressDetailVC.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 			isa = PBXGroup;
 			children = (
 				104BB3162AAA6D230087296B /* BagsVC.swift */,
+				1049116E2AB644B700B4C608 /* CartItem.swift */,
+				104911702AB644EB00B4C608 /* CartItemCell.swift */,
 			);
 			path = ShoppingBags;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				10F11F152AB07E74009EC633 /* Constants.swift in Sources */,
 				10741A442AA9E52A00998377 /* Address.swift in Sources */,
 				10C594252A8F547C001C54EF /* MyDataModel.swift in Sources */,
+				1049116F2AB644B800B4C608 /* CartItem.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				10894EEE2A9E191E00270B8D /* ManagementVC.swift in Sources */,
 				10DC25E12A94AA850059B843 /* Api.swift in Sources */,
@@ -447,6 +454,7 @@
 				10894EF12A9E195B00270B8D /* AddressVC.swift in Sources */,
 				1045385B2A8B659E0076624E /* Category.swift in Sources */,
 				10741A422AA9CF6500998377 /* NewAddressDetailVC.swift in Sources */,
+				104911712AB644EB00B4C608 /* CartItemCell.swift in Sources */,
 				10F11F172AB07E74009EC633 /* Extensions.swift in Sources */,
 				102594462A8B508A00F2711D /* SceneDelegate.swift in Sources */,
 			);

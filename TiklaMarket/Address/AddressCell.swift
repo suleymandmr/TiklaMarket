@@ -37,14 +37,5 @@ class AddressCell: UITableViewCell {
             detayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),*/
         //])
     }
-    
-    func configureCell(forAddressType addressType: AddressType) {
-          switch addressType {
-          case .home:
-              addressImageView.image = UIImage(named: "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png")
-          case .office:
-              addressImageView.image = UIImage(named: "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png")
-          }
-      }
-    
+   
 }

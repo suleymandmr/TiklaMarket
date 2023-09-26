@@ -22,6 +22,10 @@ class AddressVC: UIViewController {
         fetchDataFromRealtimeDatabase()
     }
 
+    
+   
+    
+    
     func fetchDataFromRealtimeDatabase() {
         
         let databaseRef = Database.database().reference().child("Users/\(UserModel.shared.uid)/address")
