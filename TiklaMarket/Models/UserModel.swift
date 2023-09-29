@@ -16,5 +16,5 @@ class UserModel:Codable{
     var phoneNumber      = ""
     var phoneCountryCode = ""
     var address: [AddressModel] = []
-    
+    var payment: [PaymantModel] = []
 }

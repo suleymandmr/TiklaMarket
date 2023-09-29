@@ -59,7 +59,7 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
                // Konum bilgilerini kullanabilirsiniz
                print("Latitude: \(latitude), Longitude: \(longitude)")
 
-               // Haritada kullanıcının konumunu merkezlemek için
+               // Haritada kusllanıcının konumunu merkezlemek için
                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                mapView.setRegion(region, animated: true)
            }
@@ -74,10 +74,10 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
        }
     
     @IBAction func buildingClicked(_ sender: Any) {
-        address.type = "https://cdn0.iconfinder.com/data/icons/online-shopping-fill-shoppers-features/512/Flash_sale-512.png"
+        address.type = AddressType.office.rawValue
     }
     @IBAction func homeClicked(_ sender: Any) {
-        address.type = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-1024.png"
+        address.type = AddressType.home.rawValue
     }
     
     
@@ -103,13 +103,20 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
         address.apartmentNumber = newApartmentNumberText
         address.floor           = newFlourText
         address.district        = newStreetText
-        
+    
         let ref = Database.database().reference()
-        //let newAddressRef = ref.childByAutoId()
         let userRef = ref.child("Users/"+UserModel.shared.uid+"/address").childByAutoId()
-        address.adressId = userRef.key!
-        userRef.setValue(address.toDictionnary)
+        userRef.updateChildValues(address.getAllData())
         //print("DATAAA ",userRef.key)
+        
+        
+        /*userRef.updateChildValues(["adres_baslik": newTitleText,"adres_tarifi": newDirectionsText, "bina_no": newBuildText, "daire_no" : newApartmentNumberText, "kat": newFlourText, "mahalle_cadde_sokak": newStreetText, "adresTip" : 1 ]) { (error, ref) in
+            if let error = error {
+                print("Veri güncelleme hatası: \(error.localizedDescription)")
+            } else {
+                print("Veri başarıyla güncellendi.")
+            }
+        }*/
         
     }
 }

@@ -2,15 +2,13 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
-
 class AddressCell: UITableViewCell {
     var dataIDToDelete: String?
-  
+    let title = AddressVC()
     @IBOutlet weak var addressImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    var databaseReference: DatabaseReference!
-    
+   
     @IBOutlet weak var deleteButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,5 +35,8 @@ class AddressCell: UITableViewCell {
             detayLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),*/
         //])
     }
-   
+    @IBAction func DeleteButtonClicked(_ sender: Any) {
+       
+    }
+    
 }

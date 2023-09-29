@@ -23,7 +23,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     var category: [String] = [String]()
     var categoryList = [Category]()
     var photoDataArray: [Category] = []
-    
+    var savedLocations = [CLLocationCoordinate2D]()
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -44,6 +44,17 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         collectionView.allowsSelection = true
         fetchRealtimeDatabaseData()
         checkUser()
+        fetchSavedLocationsFromFirebase()
+        fetchLocationsFromFirebase()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Haritayı temizleyin (eski pinleri kaldırın)
+        
+
+        // Firebase'den konum verilerini çekin ve haritada işaretleyin
+        fetchSavedLocationsFromFirebase()
     }
     
     func checkUser(){
@@ -56,24 +67,12 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                     print("USER ",user.email," ",user.uid)
                     UserModel.shared = user
                     
-                    let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
-                    let userPassword = String(data: data!, encoding: .utf8)!
-                    print("BILGILER ",userPassword," ",user.email)
+                    /*let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
+                    let password = String(data: data!, encoding: .utf8)!
+                    print(password)*/
                     
-                    Auth.auth().signIn(withEmail: user.email, password:userPassword) {(authResult, error) in
-                        if error != nil {
-                           print("hata")
-                            
-                            UserModel.shared = UserModel()
-                            UserDefaults.standard.set(false, forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-                            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userData.rawValue)
-                            
-                           
-                        
-                         }
-                        print("KULLANICI ",authResult)
-                     }
 
+                    
                 } catch {
                     print("Unable to Decode Note (\(error))")
                 }
@@ -85,6 +84,80 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
         
     }
+    func fetchLocationsFromFirebase() {
+        var databaseRef: DatabaseReference!
+        databaseRef = Database.database().reference()
+        // Firebase'den konum verilerini çekin
+        // Firebase'den konum verilerini çekmek için uygun veri yolunu ve kullanıcı kimliğini kullanın
+        databaseRef.child("Users/"+UserModel.shared.uid+"/address").observeSingleEvent(of: .value) { (snapshot) in
+            if let locationsData = snapshot.value as? [String: Any] {
+                for (_, locationData) in locationsData {
+                    if let locationInfo = locationData as? [String: Any],
+                       let latitude = locationInfo["latitude"] as? Double,
+                       let longitude = locationInfo["longitude"] as? Double
+                    {
+                        // Her konum için bir işaretçi (pin) oluşturun ve haritaya ekleyin
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        self.mapView.addAnnotation(annotation)
+                    }
+                }
+                
+                // Haritayı işaretlenen konumların bulunduğu bölgeye odaklayın
+                if let firstLocation = locationsData.first,
+                   let locationInfo = firstLocation.value as? [String: Any],
+                   let latitude = locationInfo["latitude"] as? Double,
+                   let longitude = locationInfo["longitude"] as? Double
+                {
+                    let centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    let region = MKCoordinateRegion(center: centerCoordinate, span: span)
+                    self.mapView.setRegion(region, animated: true)
+                }
+            }
+        }
+    }
+    func fetchSavedLocationsFromFirebase() {
+        let databaseRef = Database.database().reference().child("Users/\(UserModel.shared.uid)/address")
+        databaseRef.observeSingleEvent(of: .value) { (snapshot, error) in
+            if error != nil {
+                print("Firebase veri alma hatası: ")
+                return
+            }
+
+            if let locationData = snapshot.value as? [String: Any] {
+                for (_, data) in locationData {
+                    if let dataDict = data as? [String: Any],
+                       let latitude = dataDict["latitude"] as? Double,
+                       let longitude = dataDict["longitude"] as? Double {
+                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        self.savedLocations.append(coordinate)
+                    }
+                }
+            }
+        }
+    }
+
+    func showSelectedLocationOnMap(selectedCoordinate: CLLocationCoordinate2D) {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = selectedCoordinate
+            mapView.addAnnotation(annotation)
+            
+            // Seçilen konumu haritanın merkezine getirebilirsiniz
+            let region = MKCoordinateRegion(center: selectedCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.setRegion(region, animated: true)
+        }
+
+        // Kullanıcı daha önce seçilen bir konumu yansıtmak istediğinde bu fonksiyonu kullanabilirsiniz
+        func showSavedLocationOnMap(savedCoordinate: CLLocationCoordinate2D) {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = savedCoordinate
+            mapView.addAnnotation(annotation)
+            
+            // Mevcut konumu haritanın merkezine getirebilirsiniz
+            let region = MKCoordinateRegion(center: savedCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.setRegion(region, animated: true)
+        }
     
     // Kullanıcının konum güncellemeleri alındığında çağrılır
        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -135,6 +208,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
         
     }
+    
 }
 
 extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {

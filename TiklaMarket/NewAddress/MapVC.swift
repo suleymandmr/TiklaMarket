@@ -7,7 +7,7 @@ import FirebaseDatabase
 class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-  
+    var isPinAdded = false
     @IBOutlet weak var saveButton: UIButton!
     let locationManager = CLLocationManager()
     let databaseRef = Database.database().reference()
@@ -58,36 +58,54 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @objc func addPin(_ gestureRecognizer: UIGestureRecognizer) {
         if gestureRecognizer.state == .began {
-                let touchPoint = gestureRecognizer.location(in: mapView)
-                let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-                
-                // Mevcut tüm pinleri kaldır
-                mapView.removeAnnotations(mapView.annotations)
-                
-                // Yeni pin oluşturun ve haritaya ekleyin
-                let pin = MKPointAnnotation()
-                pin.coordinate = coordinate
-                mapView.addAnnotation(pin)
-                
-                // Seçilen pin'in koordinatlarını saklayın
-                selectedPinCoordinate = coordinate
-                
-               }
+              // Önceki pin'i kaldır
+              mapView.removeAnnotations(mapView.annotations)
+
+              let touchPoint = gestureRecognizer.location(in: mapView)
+              let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+
+              // Yeni pin oluşturun ve haritaya ekleyin
+              let pin = MKPointAnnotation()
+              pin.coordinate = coordinate
+              mapView.addAnnotation(pin)
+
+              // Seçilen pin'in koordinatlarını saklayın
+              selectedPinCoordinate = coordinate
+
+              // "Kaydet" butonunu görünür yapın
+              isPinAdded = true
+          }
+       
+
       }
     
     @IBAction func addPinButtonClicked(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // Eğer farklı bir storyboard kullanıyorsanız onun adını verin
-        if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
-            secondViewController.address.latitude = selectedPinCoordinate!.latitude
-            secondViewController.address.longitude = selectedPinCoordinate!.longitude
-        
-            navigationController?.pushViewController(secondViewController, animated: true)
-            tabBarController?.tabBar.tabsVisiblty(false)
-            
-        }
+        if isPinAdded {
+               // Pin zaten eklenmişse işlemi gerçekleştir
+               let storyboard = UIStoryboard(name: "Main", bundle: nil)
+               if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
+                   secondViewController.address.latitude = selectedPinCoordinate!.latitude
+                   secondViewController.address.longitude = selectedPinCoordinate!.longitude
+                   
+                   navigationController?.pushViewController(secondViewController, animated: true)
+                   tabBarController?.tabBar.tabsVisiblty(false)
+               }
+           } else {
+               // Pin eklenmemişse kullanıcıya hata mesajı göster
+               showAlertWithMessage("Lütfen önce bir pin ekleyin!")
+           }
+    }
+    func showAlertWithMessage(_ message: String) {
+        let alertController = UIAlertController(title: "Hata", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Tamam", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 
-             
-          
-        }
-  
+    
+    
+
+
+
+
 }
