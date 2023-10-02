@@ -40,7 +40,7 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             let longitude = location.coordinate.longitude
             
             // Konum bilgilerini kullanabilirsiniz
-            print("Latitude: \(latitude), Longitude: \(longitude)")
+            print("MAPP Latitude: \(latitude), Longitude: \(longitude)")
 
             // Haritada kullanıcının konumunu merkezlemek için
             let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -84,9 +84,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                // Pin zaten eklenmişse işlemi gerçekleştir
                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
-                   secondViewController.address.latitude = selectedPinCoordinate!.latitude
+                 /*  secondViewController.address.latitude = selectedPinCoordinate!.latitude
                    secondViewController.address.longitude = selectedPinCoordinate!.longitude
-                   
+                   */
                    navigationController?.pushViewController(secondViewController, animated: true)
                    tabBarController?.tabBar.tabsVisiblty(false)
                }

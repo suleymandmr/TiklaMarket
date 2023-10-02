@@ -24,9 +24,9 @@ class ProfileEditVC: UIViewController {
         super.viewDidLoad()
         initializeHideKeyboard()
         
-        phoneNumberText.text = UserModel.shared.phoneNumber
+       /* phoneNumberText.text = UserModel.shared.phoneNumber
         nameSurnameText.text = UserModel.shared.nameSurname
-        emailText.text = UserModel.shared.email
+        emailText.text = UserModel.shared.email*/
         /*Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
                 // Kullanıcı oturum açmışsa, kullanıcının kimliğini alıyoruz

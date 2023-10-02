@@ -46,16 +46,22 @@ class LoginVC: UIViewController {
         let ref = Database.database().reference()
         
         ref.child("Users").child(uid).observeSingleEvent(of: .value) { (snapshot, error) in
+
             if let userData = snapshot.value as? [String: Any] {
-                
+      
                 do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: userData, options: [])
+                    let decoder = JSONDecoder()
+                    let userDetails = try decoder.decode(UserModelDetails.self, from: jsonData)
+                   // let userPayment = try decoder.decode(UserModelPaymant.self, from: jsonData)
+                
                     UserModel.shared.uid = uid
-                    UserModel.shared.email = self.emailText.text!
-                    UserModel.shared.phoneNumber =  userData["phonenumber"] as! String
-                    UserModel.shared.nameSurname = userData["namesurname"] as! String
+                    UserModel.shared.details = userDetails
+                    //UserModel.shared.paymentDetail = userPayment
+                    
+                    //save device
                     let encoder = JSONEncoder()
                     let user = try encoder.encode(UserModel.shared)
-                  
                     //save user data & password
                     UserDefaults.standard.setLoggedIn(value: true)
                     UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
@@ -64,7 +70,6 @@ class LoginVC: UIViewController {
                     KeychainHelper.save(data, label: KeyChainKeys.password.rawValue)
 
                     self.performSegue(withIdentifier: "toMainVC", sender: nil)
-                    print("PHONE ",userData["phonenumber"])
     
                 } catch {
                     print("Unable to Encode Note (\(error))")

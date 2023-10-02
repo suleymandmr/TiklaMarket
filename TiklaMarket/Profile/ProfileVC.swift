@@ -39,9 +39,9 @@ class ProfileVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        phoneNumberLabel.text = UserModel.shared.phoneNumber
-        nameSurnameLabel.text = UserModel.shared.nameSurname
-        emailLabel.text = UserModel.shared.email
+        phoneNumberLabel.text = UserModel.shared.details.phoneNumber
+        nameSurnameLabel.text = UserModel.shared.details.nameSurname
+        emailLabel.text = UserModel.shared.details.email
     }
 
    

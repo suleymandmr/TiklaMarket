@@ -64,7 +64,6 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                 do {
                     let decoder = JSONDecoder()
                     let user = try decoder.decode(UserModel.self, from: data)
-                    print("USER ",user.email," ",user.uid)
                     UserModel.shared = user
                     
                     /*let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)

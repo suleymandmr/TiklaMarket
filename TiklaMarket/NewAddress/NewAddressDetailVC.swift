@@ -57,7 +57,7 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
                let longitude = location.coordinate.longitude
                
                // Konum bilgilerini kullanabilirsiniz
-               print("Latitude: \(latitude), Longitude: \(longitude)")
+               print("NEW ADRESS Latitude: \(latitude), Longitude: \(longitude)")
 
                // Haritada kusllanıcının konumunu merkezlemek için
                let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -74,10 +74,10 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
        }
     
     @IBAction func buildingClicked(_ sender: Any) {
-        address.type = AddressType.office.rawValue
+        address.type = AddressTypes.office.rawValue
     }
     @IBAction func homeClicked(_ sender: Any) {
-        address.type = AddressType.home.rawValue
+        address.type = AddressTypes.home.rawValue
     }
     
     
@@ -104,9 +104,11 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
         address.floor           = newFlourText
         address.district        = newStreetText
     
-        let ref = Database.database().reference()
-        let userRef = ref.child("Users/"+UserModel.shared.uid+"/address").childByAutoId()
-        userRef.updateChildValues(address.getAllData())
+        /*UPDATE İŞLEMINDE PUSH EDİLECEK..
+         
+         let ref = Database.database().reference()
+        let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
+        userRef.updateChildValues(address.getAllData())*/
         //print("DATAAA ",userRef.key)
         
         

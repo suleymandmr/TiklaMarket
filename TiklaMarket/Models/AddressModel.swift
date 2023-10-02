@@ -10,9 +10,9 @@ import CoreLocation
 
 class AddressModel:Codable{
     
-    var type                              = AddressType.home.rawValue
-    var latitude:CLLocationDegrees        = 0
-    var longitude:CLLocationDegrees       = 0
+    var type                              = AddressTypes.home.rawValue
+    var latitude                          = 0.0
+    var longitude                         = 0.0
     var title                             = ""
     var description                       = ""
     var buildingNumber                    = ""
@@ -21,6 +21,7 @@ class AddressModel:Codable{
     var district                          = ""
     
     func getAllData() -> [String: Any]{
+        //tek değeri push etmek için (test edilmedi)
         return  [
             "type": type,
             "latitude": latitude,
@@ -34,3 +35,4 @@ class AddressModel:Codable{
         ]
     }
 }
+

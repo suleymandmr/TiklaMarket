@@ -6,8 +6,3 @@
 //
 
 import Foundation
-struct Address{
-    var image : [String]
-    var title : String
-    var location : String
-}
