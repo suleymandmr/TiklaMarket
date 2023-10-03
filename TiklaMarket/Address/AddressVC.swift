@@ -41,32 +41,28 @@ class AddressVC: UIViewController {
 extension AddressVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-        
-                UserModel.shared.details.address.remove(at: indexPath.row)
-                //BAŞKA BİR SAYFADA ORTAK USER UPDATE YAP
-                //save device
-                do {
-                    let encoder = JSONEncoder()
-                    let user = try encoder.encode(UserModel.shared)
-                    //save user data & password
-                    UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
-                    
-                    var arr = UserModel.shared.details.address.map({ $0.getAllData() })
-                    //map filter reduce
-                    
-                    let ref = Database.database().reference()
-                    let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
-                    userRef.setValue(arr )
-                } catch{}
-    
-                  tableView.deleteRows(at: [indexPath], with: .fade)
-              }
+            UserModel.shared.details.address.remove(at: indexPath.row)
+            //BAŞKA BİR SAYFADA ORTAK USER UPDATE YAP
+            //save device
+            do {
+                let encoder = JSONEncoder()
+                let user = try encoder.encode(UserModel.shared)
+                //save user data & password
+                UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+                //map filter reduce
+                let arr = UserModel.shared.details.address.map({ $0.getAllData() })
+                let ref = Database.database().reference()
+                let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
+                userRef.setValue(arr)
+            } catch {}
+            tableView.deleteRows(at: [indexPath], with: .fade)
+          }
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return UserModel.shared.details.address.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AddressCell
         

@@ -53,11 +53,9 @@ class LoginVC: UIViewController {
                     let jsonData = try JSONSerialization.data(withJSONObject: userData, options: [])
                     let decoder = JSONDecoder()
                     let userDetails = try decoder.decode(UserModelDetails.self, from: jsonData)
-                   // let userPayment = try decoder.decode(UserModelPaymant.self, from: jsonData)
                 
                     UserModel.shared.uid = uid
                     UserModel.shared.details = userDetails
-                    //UserModel.shared.paymentDetail = userPayment
                     
                     //save device
                     let encoder = JSONEncoder()
@@ -68,7 +66,6 @@ class LoginVC: UIViewController {
                     //pass
                     let data = Data(self.passwordText.text!.utf8)
                     KeychainHelper.save(data, label: KeyChainKeys.password.rawValue)
-
                     self.performSegue(withIdentifier: "toMainVC", sender: nil)
     
                 } catch {

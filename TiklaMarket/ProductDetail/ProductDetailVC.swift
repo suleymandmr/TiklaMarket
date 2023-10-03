@@ -21,13 +21,13 @@ class ProductDetailVC: UIViewController {
         super.viewDidLoad()
         pieceLabel.text = "\(counter)"
         
-        if let data = selectedProduct {
-            ProductDetailLabel.text = data.productName
-            ProductDetailPayLabel.text = data.productPay
-            detailTextLabel.text = data.productSubject
+        if let product = selectedProduct {
+            ProductDetailLabel.text = product.name
+            ProductDetailPayLabel.text = product.pay
+            detailTextLabel.text = product.subject
             detailTextLabel.isEditable = false
             
-            if let imageUrl = URL(string: data.productImageURL) {
+            if let imageUrl = URL(string: product.imageURL) {
                 ProductDetailImageView.sd_setImage(with: imageUrl, completed: nil)
             }
             
@@ -59,71 +59,11 @@ class ProductDetailVC: UIViewController {
             return
         }
         
-        let userUID = UserModel.shared.uid
-        let bagID = "-NfASeuuZSCyHznu1OT-"
-        
-        let bagsRef = Database.database().reference().child("Users/\(userUID)/Bags")
-        bagsRef.observeSingleEvent(of: .value) { (bagSnapshot, error) in
-            if let error = error {
-               // print("Firebase Bags veri alma hatası: \(error.localizedDescription)")
-                return
-            }
-            
-            if var bagData = bagSnapshot.value as? [String: Any] {
-                if var bagItems = bagData[bagID] as? [[String: Any]] {
-                    if let existingItemIndex = bagItems.firstIndex(where: { $0["productId"] as? String == productID }) {
-                        if let existingCountString = bagItems[existingItemIndex]["count"] as? String,
-                            var existingCount = Int(existingCountString),
-                            let pieceLabelText = self.pieceLabel.text,
-                            let pieceLabelCount = Int(pieceLabelText) {
-                            existingCount += pieceLabelCount
-                            bagItems[existingItemIndex]["count"] = "\(existingCount)"
-                        }
-                    } else {
-                        let cartItem: [String: Any] = [
-                            "count": self.pieceLabel.text ?? "0",
-                            "productId": productID
-                        ]
-                        bagItems.append(cartItem)
-                    }
-                    bagData[bagID] = bagItems
-                    bagsRef.setValue(bagData) { (error, _) in
-                        if let error = error {
-                            print("Firebase veri ekleme hatası: \(error.localizedDescription)")
-                        } else {
-                            print("Ürün başarıyla sepete eklendi veya sayısı artırıldı.")
-                        }
-                    }
-                } else {
-                    let cartItem: [String: Any] = [
-                        "count": self.pieceLabel.text ?? "0",
-                        "productId": productID
-                    ]
-                    let newBagItems = [cartItem]
-                    bagData[bagID] = newBagItems
-                    bagsRef.setValue(bagData) { (error, _) in
-                        if let error = error {
-                            print("Firebase veri ekleme hatası: \(error.localizedDescription)")
-                        } else {
-                            print("Ürün başarıyla sepete eklendi.")
-                        }
-                    }
-                }
-            } else {
-                let cartItem: [String: Any] = [
-                    "count": self.pieceLabel.text ?? "0",
-                    "productId": productID
-                ]
-                let newBagItems = [cartItem]
-                let newBagData = [bagID: newBagItems]
-                bagsRef.setValue(newBagData) { (error, _) in
-                    if let error = error {
-                        print("Firebase veri ekleme hatası: \(error.localizedDescription)")
-                    } else {
-                        print("Ürün başarıyla sepete eklendi.")
-                    }
-                }
-            }
-        }
+        //UserModel.shared.details.bags
+        /*let arr = UserModel.shared.details.bags!.map({ $0.getAllData() })
+        let ref = Database.database().reference()
+        let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags")
+        userRef.setValue(arr)*/
     }
+
 }

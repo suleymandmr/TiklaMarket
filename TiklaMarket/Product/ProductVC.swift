@@ -143,10 +143,11 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionVC", for: indexPath) as! ProductCollectionVC
-            let film = activeProductList[indexPath.row]
-            cell.payLabel.text = film.productPay
-            cell.productLabel.text = film.productName
-            cell.productImageView.sd_setImage(with: URL(string: film.productImageURL))
+            
+            let product = activeProductList[indexPath.row] as! Product
+            cell.payLabel.text = product.pay
+            cell.productLabel.text = product.name
+            cell.productImageView.sd_setImage(with: URL(string: product.imageURL))
             return cell
         }
         
