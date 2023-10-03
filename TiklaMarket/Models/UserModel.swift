@@ -20,7 +20,7 @@ class UserModelDetails:Codable{
     var phoneNumber             = ""
     var phoneCountryCode        = ""
     var address: [AddressModel] = []
-    var bags: [BagsModel]?       = []
+    var bags: BagsModel?        = BagsModel()
     //var payment: [PaymantModel] = []
     
     //var paymentDetail:UserModelPaymant = UserModelPaymant()

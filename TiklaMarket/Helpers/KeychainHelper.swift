@@ -11,7 +11,6 @@ import Security
 class KeychainHelper{
     
     static func save(_ data: Data, label: String) {
-        
         // Create query
         let query = [
             kSecValueData: data,

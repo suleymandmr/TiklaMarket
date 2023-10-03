@@ -17,13 +17,13 @@ struct Product:Codable {
     //in bag
     var count:Int? = 0
     
-
-
-    /*func getAllData() -> [String : Any]{
+    func getAllData() -> [String : Any]{
         return [
             "count" : count,
-            "productId" : id,
+            "name":name,
+            "id" : id,
+            "pay":pay
         ]
         
-    }*/
+    }
 }
