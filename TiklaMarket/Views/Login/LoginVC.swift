@@ -53,10 +53,13 @@ class LoginVC: UIViewController {
                     let jsonData = try JSONSerialization.data(withJSONObject: userData, options: [])
                     let decoder = JSONDecoder()
                     let userDetails = try decoder.decode(UserModelDetails.self, from: jsonData)
-                
+                    UserModel.shared = UserModel()
                     UserModel.shared.uid = uid
                     UserModel.shared.details = userDetails
                     
+                    /*adres: ["dsfdsfsdf","dfdsfsdfsdfdsf","fdsfdsfsdfsdfds" ]
+                    eskiadres = { "1.indetifier": { number: "4", }    }*/
+
                     //save device
                     let encoder = JSONEncoder()
                     let user = try encoder.encode(UserModel.shared)

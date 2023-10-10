@@ -49,12 +49,14 @@ extension AddressVC: UITableViewDelegate, UITableViewDataSource {
                 let user = try encoder.encode(UserModel.shared)
                 //save user data & password
                 UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+                
                 //map filter reduce
                 let arr = UserModel.shared.details.address.map({ $0.getAllData() })
                 let ref = Database.database().reference()
                 let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
                 userRef.setValue(arr)
             } catch {}
+
             tableView.deleteRows(at: [indexPath], with: .fade)
           }
     }
@@ -101,7 +103,13 @@ extension AddressVC: UITableViewDelegate, UITableViewDataSource {
         let selectedLocation = UserModel.shared.details.address[indexPath.row].district
         
         UserModel.shared.selectedAddressID = indexPath.row
-        
+        do{
+            let encoder = JSONEncoder()
+            let user = try encoder.encode(UserModel.shared)
+            //save user data & password
+            UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+        } catch{}
+       
         print("Seçilen Tip: \(selectedType)")
         print("Seçilen Başlık: \(selectedTitle)")
         print("Seçilen Lokasyon: \(selectedLocation)")

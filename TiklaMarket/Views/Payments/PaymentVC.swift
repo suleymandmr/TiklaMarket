@@ -87,75 +87,70 @@ class PaymentVC: UIViewController {
     }
     
     @IBAction func confirmCartClicked(_ sender: Any) {
-        guard let newNoteLabel = noteText.text,
-                   let newPayLabel = payLabel.text else {
-                 return
-             }
-             
         
-        
-        
-             petments.note = newNoteLabel
-             petments.pay = newPayLabel
-             
-             let ref = Database.database().reference()
-             let userUID = UserModel.shared.uid
-             let bagsRef = ref.child("Users/\(userUID)/Bags")
-             let gecmisSiparislerRef = ref.child("Users/\(userUID)/GecmisSiparisler")
-             
-             bagsRef.observeSingleEvent(of: .value) { (bagSnapshot, _) in
-                 if let bagData = bagSnapshot.value as? [String: Any] {
-                     for (_, bagItems) in bagData {
-                         if let bagItemsArray = bagItems as? [[String: String]] {
-                             let newGecmisSiparislerRef = gecmisSiparislerRef.childByAutoId()
-                             var gecmisSiparisData: [String: Any] = [:]
-                             var urunlerData: [[String: Any]] = []
-                             
-                             for bagItem in bagItemsArray {
-                                 if let productId = bagItem["productId"],
-                                    let countString = bagItem["count"],
-                                    let count = Int(countString) {
-                                     let currentDate = Date()
-                                     let dateFormatter = DateFormatter()
-                                     dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
-                                     let siparisTarihi = dateFormatter.string(from: currentDate)
-                                     
-                                     gecmisSiparisData["siparis_tarihi"] = siparisTarihi
-                                     gecmisSiparisData["tur"] = self.petments.type // Sipariş türü buraya eklenebilir
-                                     gecmisSiparisData["ucret"] = self.petments.pay // Toplam ücret buraya eklenebilir
-                                     gecmisSiparisData["not"] = newNoteLabel
-                                     let urunData: [String: Any] = [
-                                         "count": countString,
-                                         "productId": productId
-                                     ]
-                                     urunlerData.append(urunData)
-                                 }
-                             }
-                             
-                             gecmisSiparisData["urunler"] = urunlerData
-                             newGecmisSiparislerRef.setValue(gecmisSiparisData) { (error, _) in
-                                 if let error = error {
-                                     print("Firebase veri taşıma hatası: \(error.localizedDescription)")
-                                 } else {
-                                     print("Veriler başarıyla taşındı.")
-                                     bagsRef.setValue(nil) { (error, _) in
-                                         if let error = error {
-                                             print("Mevcut çanta verilerini silme hatası: \(error.localizedDescription)")
-                                         } else {
-                                             print("Mevcut çanta verileri başarıyla silindi.")
-                                         }
-                                     }
-                                     
-                                     // Notu etiketin metni olarak ayarla
-                                     self.noteText.text = newNoteLabel
-                                 }
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-    
+            // Kullanıcının not ve ödeme bilgilerini alın
+            guard let newNoteLabel = noteText.text,
+                !newNoteLabel.isEmpty,
+                let newPayLabel = payLabel.text else {
+                    // Not veya ödeme bilgisi eksikse işlemi durdur
+                    return
+            }
+
+            // Firebase referansları oluşturun
+            let ref = Database.database().reference()
+            let userUID = UserModel.shared.uid
+            let bagsRef = ref.child("Users/\(userUID)/bags")
+            let gecmisSiparislerRef = ref.child("Users/\(userUID)/GecmisSiparisler")
+
+            // Çanta verilerini silin
+            bagsRef.removeValue { (error, _) in
+                if let error = error {
+                    print("Mevcut çanta verilerini silme hatası: \(error.localizedDescription)")
+                } else {
+                    print("Mevcut çanta verileri başarıyla silindi.")
+
+                    // Geçmiş sipariş verilerini oluşturun
+                    let currentDate = Date()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss"
+                    let siparisTarihi = dateFormatter.string(from: currentDate)
+                    var gecmisSiparisData: [String: Any] = [
+                        "siparis_tarihi": siparisTarihi,
+                        "tur": self.petments.type, // Ödeme türünü buraya ekleyebilirsiniz
+                        "ucret": self.petments.pay, // Toplam ücreti buraya ekleyebilirsiniz
+                        "not": newNoteLabel
+                    ]
+
+                    // Ürün verilerini oluşturun
+                    var urunlerData: [[String: Any]] = []
+                    for (index, feeString) in self.feeArray.enumerated() {
+                        if let fee = Double(feeString.replacingOccurrences(of: " tl", with: "")),
+                            let count = Int(self.payArray[index].replacingOccurrences(of: " adet", with: "")) {
+                            let urunData: [String: Any] = [
+                                "count": count,
+                                "productId": self.payArray[index]
+                            ]
+                            urunlerData.append(urunData)
+                        }
+                    }
+                    gecmisSiparisData["urunler"] = urunlerData
+
+                    // Geçmiş sipariş verilerini Firebase'e kaydedin
+                    let newGecmisSiparislerRef = gecmisSiparislerRef.childByAutoId()
+                    newGecmisSiparislerRef.setValue(gecmisSiparisData) { (error, _) in
+                        if let error = error {
+                            print("Firebase veri taşıma hatası: \(error.localizedDescription)")
+                        } else {
+                            print("Veriler başarıyla taşındı.")
+
+                            // Notu etiketin metni olarak ayarla
+                            self.noteText.text = newNoteLabel
+                        }
+                    }
+                }
+            }
+        }
+
     
     
 }

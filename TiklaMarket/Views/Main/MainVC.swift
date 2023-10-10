@@ -44,18 +44,57 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         collectionView.allowsSelection = true
         fetchRealtimeDatabaseData()
         checkUser()
-        fetchSavedLocationsFromFirebase()
-        fetchLocationsFromFirebase()
+       
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+     
+        print("Deneme\(UserModel.shared.selectedAddressID)")
+        if(UserModel.shared.selectedAddressID != -1){
+            mapView.removeAnnotations(mapView.annotations)
+            let activeLat = CLLocationDegrees(UserModel.shared.details.address[UserModel.shared.selectedAddressID].latitude)
+            let activeLong = CLLocationDegrees(UserModel.shared.details.address[UserModel.shared.selectedAddressID].longitude)
+            
+            let pin = MKPointAnnotation()
+            pin.coordinate = CLLocationCoordinate2D(latitude:activeLat, longitude: activeLong)
+            pin.title = "You are here"
+            updateMapForCoordinate(coordinate: pin.coordinate)
+            mapView.addAnnotation(pin)
+            
+        }
 
-        // Haritayı temizleyin (eski pinleri kaldırın)
         
-
-        // Firebase'den konum verilerini çekin ve haritada işaretleyin
-        fetchSavedLocationsFromFirebase()
     }
+    
+    func updateMapForCoordinate(coordinate: CLLocationCoordinate2D) {
+        let camera = MKMapCamera(lookingAtCenter: coordinate, fromDistance: 1000, pitch: 0, heading: 0)
+        mapView.setCamera(camera, animated: false)
+        var center = coordinate;
+        center.latitude -= self.mapView.region.span.latitudeDelta / 6.0;
+        mapView.setCenter(center, animated: false);
+    }
+    func bagsCheck() {
+        let ref = Database.database().reference()
+        let query = "Users/" + UserModel.shared.uid + "/bags"
+        ref.child(query).observeSingleEvent(of: .value) { (snapshot, error) in
+            
+            if let bagData = snapshot.value as? [String: Any] {
+                
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: bagData, options: [])
+                    let decoder = JSONDecoder()
+                    let bagsModel = try decoder.decode(BagsModel.self, from: jsonData)
+                    
+                    UserModel.shared.details.bags = bagsModel
+                }catch{}
+            }else{
+                UserModel.shared.details.bags = BagsModel()
+                print("testtt")
+            }
+        }
+    }
+
     
     func checkUser(){
     
@@ -65,7 +104,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
                     let decoder = JSONDecoder()
                     let user = try decoder.decode(UserModel.self, from: data)
                     UserModel.shared = user
-                    
+                    bagsCheck()
                     /*let data = KeychainHelper.read(label: KeyChainKeys.password.rawValue)
                     let password = String(data: data!, encoding: .utf8)!
                     print(password)*/
@@ -83,59 +122,8 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         }
         
     }
-    func fetchLocationsFromFirebase() {
-        var databaseRef: DatabaseReference!
-        databaseRef = Database.database().reference()
-        // Firebase'den konum verilerini çekin
-        // Firebase'den konum verilerini çekmek için uygun veri yolunu ve kullanıcı kimliğini kullanın
-        databaseRef.child("Users/"+UserModel.shared.uid+"/address").observeSingleEvent(of: .value) { (snapshot) in
-            if let locationsData = snapshot.value as? [String: Any] {
-                for (_, locationData) in locationsData {
-                    if let locationInfo = locationData as? [String: Any],
-                       let latitude = locationInfo["latitude"] as? Double,
-                       let longitude = locationInfo["longitude"] as? Double
-                    {
-                        // Her konum için bir işaretçi (pin) oluşturun ve haritaya ekleyin
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        self.mapView.addAnnotation(annotation)
-                    }
-                }
-                
-                // Haritayı işaretlenen konumların bulunduğu bölgeye odaklayın
-                if let firstLocation = locationsData.first,
-                   let locationInfo = firstLocation.value as? [String: Any],
-                   let latitude = locationInfo["latitude"] as? Double,
-                   let longitude = locationInfo["longitude"] as? Double
-                {
-                    let centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-                    let region = MKCoordinateRegion(center: centerCoordinate, span: span)
-                    self.mapView.setRegion(region, animated: true)
-                }
-            }
-        }
-    }
-    func fetchSavedLocationsFromFirebase() {
-        let databaseRef = Database.database().reference().child("Users/\(UserModel.shared.uid)/address")
-        databaseRef.observeSingleEvent(of: .value) { (snapshot, error) in
-            if error != nil {
-                print("Firebase veri alma hatası: ")
-                return
-            }
-
-            if let locationData = snapshot.value as? [String: Any] {
-                for (_, data) in locationData {
-                    if let dataDict = data as? [String: Any],
-                       let latitude = dataDict["latitude"] as? Double,
-                       let longitude = dataDict["longitude"] as? Double {
-                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        self.savedLocations.append(coordinate)
-                    }
-                }
-            }
-        }
-    }
+   
+    
 
     func showSelectedLocationOnMap(selectedCoordinate: CLLocationCoordinate2D) {
             let annotation = MKPointAnnotation()
@@ -160,16 +148,20 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
     
     // Kullanıcının konum güncellemeleri alındığında çağrılır
        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-           if let location = locations.last {
-               let latitude = location.coordinate.latitude
-               let longitude = location.coordinate.longitude
-               
-               // Konum bilgilerini kullanabilirsiniz
-               print("Latitude: \(latitude), Longitude: \(longitude)")
+          
+           if(UserModel.shared.selectedAddressID == -1){
+               if let location = locations.last {
+                   let latitude = location.coordinate.latitude
+                   let longitude = location.coordinate.longitude
+                   
+                   // Konum bilgilerini kullanabilirsiniz
+                   print("Latitude: \(latitude), Longitude: \(longitude)")
 
-               // Haritada kullanıcının konumunu merkezlemek için
-               let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-               mapView.setRegion(region, animated: true)
+                   // Haritada kullanıcının konumunu merkezlemek için
+                   let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                 mapView.setRegion(region, animated: true)
+                   
+               }
            }
        }
     

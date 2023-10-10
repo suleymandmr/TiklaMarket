@@ -32,8 +32,8 @@ class PastOrdersVC: UIViewController {
         let userUID = UserModel.shared.uid // Kullanıcının UID'si
         
         // Kullanıcının çantasındaki ürünleri çekmek için referansı oluşturun
-        let bagsRef = Database.database().reference().child("Users/\(userUID)/Bags")
-        let productsRef = Database.database().reference().child("Products")
+        let bagsRef = Database.database().reference().child("Users/\(userUID)/bags")
+        let productsRef = Database.database().reference().child("products")
         
         bagsRef.observeSingleEvent(of: .value) { (bagSnapshot) in
             if let bagData = bagSnapshot.value as? [String: Any] {
@@ -80,6 +80,9 @@ class PastOrdersVC: UIViewController {
             print("Firebase Bags veri alma hatası: \(error.localizedDescription)")
         }
      }
+    
+    
+    
     
 
 }

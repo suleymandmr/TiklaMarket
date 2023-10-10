@@ -1,27 +1,29 @@
-//
-//  Addresss.swift
-//  TiklaMarket
-//
-//  Created by eyüp yaşar demir on 11.09.2023.
-//
-
-import Foundation
-import CoreLocation
-
-class AddressModel:Codable{
+class AddressModel: Codable {
     
-    var type                              = AddressTypes.home.rawValue
-    var latitude                          = 0.0
-    var longitude                         = 0.0
-    var title                             = ""
-    var description                       = ""
-    var buildingNumber                    = ""
-    var apartmentNumber                   = ""
-    var floor                             = ""
-    var district                          = ""
+    var type: String
+    var latitude: Double
+    var longitude: Double
+    var title: String
+    var description: String
+    var buildingNumber: String
+    var apartmentNumber: String
+    var floor: String
+    var district: String
     
-    func getAllData() -> [String: Any]{
-        //tek değeri push etmek için (test edilmedi)
+    // Varsayılan başlatıcı
+    init() {
+        self.type = AddressTypes.home.rawValue
+        self.latitude = 0.0
+        self.longitude = 0.0
+        self.title = ""
+        self.description = ""
+        self.buildingNumber = ""
+        self.apartmentNumber = ""
+        self.floor = ""
+        self.district = ""
+    }
+    
+    func getAllData() -> [String: Any] {
         return  [
             "type": type,
             "latitude": latitude,
@@ -35,4 +37,3 @@ class AddressModel:Codable{
         ]
     }
 }
-

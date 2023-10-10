@@ -23,11 +23,11 @@ class ProductDetailVC: UIViewController {
         
         if let product = selectedProduct {
             ProductDetailLabel.text = product.name
-            ProductDetailPayLabel.text = product.pay
+            ProductDetailPayLabel.text = String(product.pay!) + " ₺"
             detailTextLabel.text = product.subject
             detailTextLabel.isEditable = false
             
-            if let imageUrl = URL(string: product.imageURL) {
+            if let imageUrl = URL(string: product.imageURL!) {
                 ProductDetailImageView.sd_setImage(with: imageUrl, completed: nil)
             }
             
@@ -58,12 +58,12 @@ class ProductDetailVC: UIViewController {
         guard let productID = selectedProduct?.id else {
             return
         }
- 
+        //update device bag
         selectedProduct?.count = Int(pieceLabel.text!)
-        UserModel.shared.details.bags?.productList.append(selectedProduct!)
-        print(UserModel.shared.details.bags)
-        
-        let arr = UserModel.shared.details.bags?.getAllData()
+        UserModel.shared.details.bags!.totalPrice += (Int(selectedProduct!.pay!) ?? 0) * Int(selectedProduct!.count!)
+        UserModel.shared.details.bags!.products.append(selectedProduct!)
+        //update firebase by bag
+        let arr = UserModel.shared.details.bags!.getAllData()
         let ref = Database.database().reference()
         let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags")
         userRef.setValue(arr)

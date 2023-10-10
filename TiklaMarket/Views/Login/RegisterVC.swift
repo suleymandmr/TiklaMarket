@@ -42,10 +42,10 @@ class RegisterVC: UIViewController {
                     // Firestore veri yapısını hazırlayın
                     let firestorePost = [
                                 
-                                    "namesurname": self.nameText.text!,
+                                    "nameSurname": self.nameText.text!,
                                     "email": self.emailText.text!,
-                                    "phone_country_code": self.countryText.text!,
-                                    "phonenumber": self.phoneText.text!
+                                    "phoneCountryCode": self.countryText.text!,
+                                    "phoneNumber": self.phoneText.text!
                                 ]as [String: Any]
                                 
                                 

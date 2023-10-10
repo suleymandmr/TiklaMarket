@@ -147,7 +147,7 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             let product = activeProductList[indexPath.row] as! Product
             cell.payLabel.text = product.pay
             cell.productLabel.text = product.name
-            cell.productImageView.sd_setImage(with: URL(string: product.imageURL))
+            cell.productImageView.sd_setImage(with: URL(string: product.imageURL!))
             return cell
         }
         
@@ -173,17 +173,8 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
                 await fetchRealtimeDatabaseData()
             }
             
-            
-            
         } else {
            
-         
-            // let category = activeProductList[indexPath.row]
-            // photoTapped(at: category)
-            
-            
-            //performSegue(withIdentifier: "", sender: nil)
-            
            photoTapped(at: indexPath)
         }
         

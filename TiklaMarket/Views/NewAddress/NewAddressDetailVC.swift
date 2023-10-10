@@ -104,11 +104,20 @@ class NewAddressDetailVC: UIViewController , MKMapViewDelegate, CLLocationManage
         address.floor           = newFlourText
         address.district        = newStreetText
     
-        /*UPDATE İŞLEMINDE PUSH EDİLECEK..
-         
-         let ref = Database.database().reference()
-        let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
-        userRef.updateChildValues(address.getAllData())*/
+        //UPDATE İŞLEMINDE PUSH EDİLECEK..
+        do{
+            UserModel.shared.details.address.append(address)
+            let encoder = JSONEncoder()
+            let user = try encoder.encode(UserModel.shared)
+            //save user data & password
+            UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+            
+            //map filter reduce
+            let arr = UserModel.shared.details.address.map({ $0.getAllData() })
+            let ref = Database.database().reference()
+            let userRef = ref.child("Users/"+UserModel.shared.uid+"/address")
+            userRef.setValue(arr)
+        }catch {}
         //print("DATAAA ",userRef.key)
         
         

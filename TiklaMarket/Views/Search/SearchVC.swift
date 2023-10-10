@@ -29,15 +29,21 @@ class SearchVC: UIViewController, UISearchResultsUpdating {
              fetchDataFromRealtimeDatabase()
       }
     
+    override func viewDidAppear(_ animated: Bool) {//TODO: SİL
+        fetchDataFromRealtimeDatabase()
+    }
+    
     func fetchDataFromRealtimeDatabase() {
         let productsRef = Database.database().reference().child("Products")
 
-          productsRef.observeSingleEvent(of: .value, with: { (productSnapshot) in
+        productsRef.queryOrdered(byChild: "id")
+            .observeSingleEvent(of: .value, with: { (productSnapshot) in
               guard let productData = productSnapshot.value as? [String: Any] else {
                   print("Firebase Products veri bulunamadı.")
                   return
               }
-
+              //var productSortedData = productData.sorted { $0.0 < $1.0 }.map { $0 }
+                
               for (key, value) in productData {
                   if let productInfo = value as? [String: Any],
                      let name = productInfo["name"] as? String,

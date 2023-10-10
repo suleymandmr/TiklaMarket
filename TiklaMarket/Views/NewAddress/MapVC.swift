@@ -84,9 +84,9 @@ class MapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                // Pin zaten eklenmişse işlemi gerçekleştir
                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                if let secondViewController = storyboard.instantiateViewController(withIdentifier: "NewAddressDetailVC") as? NewAddressDetailVC {
-                 /*  secondViewController.address.latitude = selectedPinCoordinate!.latitude
+                  secondViewController.address.latitude = selectedPinCoordinate!.latitude
                    secondViewController.address.longitude = selectedPinCoordinate!.longitude
-                   */
+                
                    navigationController?.pushViewController(secondViewController, animated: true)
                    tabBarController?.tabBar.tabsVisiblty(false)
                }
