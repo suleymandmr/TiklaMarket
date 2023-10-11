@@ -56,17 +56,18 @@ class ProductDetailVC: UIViewController {
     
     @IBAction func DetailButtonClicked(_ sender: Any) {
         guard let productID = selectedProduct?.id else {
-            return
-        }
-        //update device bag
-        selectedProduct?.count = Int(pieceLabel.text!)
-        UserModel.shared.details.bags!.totalPrice += (Int(selectedProduct!.pay!) ?? 0) * Int(selectedProduct!.count!)
-        UserModel.shared.details.bags!.products.append(selectedProduct!)
-        //update firebase by bag
-        let arr = UserModel.shared.details.bags!.getAllData()
-        let ref = Database.database().reference()
-        let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags")
-        userRef.setValue(arr)
-    }
+                   return
+               }
+               //update device bag
+               selectedProduct?.count = Int(pieceLabel.text!)
+               UserModel.shared.details.bags!.totalPrice += (Double(selectedProduct!.pay!) ?? 0) * Double(selectedProduct!.count!)
+               UserModel.shared.details.bags!.products.append(selectedProduct!)
+               //update firebase by bag
+               let arr = UserModel.shared.details.bags!.getAllData()
+               let ref = Database.database().reference()
+               let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags")
+               userRef.setValue(arr)
+           }
+
 
 }

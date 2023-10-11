@@ -58,7 +58,7 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
             
             let pin = MKPointAnnotation()
             pin.coordinate = CLLocationCoordinate2D(latitude:activeLat, longitude: activeLong)
-            pin.title = "You are here"
+            pin.title = "Gönderilecek Adres"
             updateMapForCoordinate(coordinate: pin.coordinate)
             mapView.addAnnotation(pin)
             

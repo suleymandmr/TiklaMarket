@@ -181,12 +181,12 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
     }
 }
-    extension ProductVC {
-        func photoTapped(at indexPath: IndexPath) {
-            
-            print("Photo tapped at index: \(indexPath.row)")
-                    
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as! ProductDetailVC
+        extension ProductVC {
+            func photoTapped(at indexPath: IndexPath) {
+                
+                print("Photo tapped at index: \(indexPath.row)")
+                        
+                        let next = self.storyboard?.instantiateViewController(withIdentifier: "ProductDetailVC") as! ProductDetailVC
 //                sonraki sayfaya sınırlı veri geçişi
 //                   next.relatedProducts = Array(activeProductList[0..<1])
             let selectedProduct = activeProductList[indexPath.row]
