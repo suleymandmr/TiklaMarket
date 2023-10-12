@@ -20,6 +20,7 @@ class UserModelDetails:Codable{
     var phoneCountryCode:String    = ""
     var address: [AddressModel]    = []
     var bags: BagsModel?
+    var pastOrders: PastOrderModel?
     //var pastPays
     
     required init(from decoder: Decoder) throws {
@@ -30,6 +31,7 @@ class UserModelDetails:Codable{
         self.phoneCountryCode = try container.decode(String.self, forKey: .phoneCountryCode)
         self.address = try container.decodeIfPresent([AddressModel].self, forKey: .address) ?? []
         self.bags =  try container.decodeIfPresent(BagsModel.self, forKey: .bags) ?? BagsModel()
+        self.pastOrders = try container.decodeIfPresent(PastOrderModel.self, forKey: .pastOrders) ?? PastOrderModel()
     }
     
     init(){}

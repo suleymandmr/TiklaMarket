@@ -71,19 +71,22 @@ class BagsVC: UIViewController {
     func updateTotalPriceLabel() {
         var totalPrice = 0.0
         
-        for product in UserModel.shared.details.bags!.products {
-            if let payString = product.pay, let countString = product.count,
-               let productPrice = Double(payString), let productCount = Double(exactly: countString) {
-                totalPrice += productPrice * productCount
-            } else {
-                // Dönüşüm başarısız oldu, uygun bir hata yönetimi ekleyebilirsiniz
-                print("Dönüşüm başarısız oldu.")
+        if let bags = UserModel.shared.details.bags, !bags.products.isEmpty {
+            for product in bags.products {
+                if let payString = product.pay, let countString = product.count,
+                   let productPrice = Double(payString), let productCount = Double(exactly: countString) {
+                    totalPrice += productPrice * productCount
+                } else {
+                    // Dönüşüm başarısız oldu, uygun bir hata yönetimi ekleyebilirsiniz
+                    print("Dönüşüm başarısız oldu.")
+                }
             }
         }
         
         UserModel.shared.details.bags?.totalPrice = totalPrice
         feeLabel.text = "\(totalPrice)"
     }
+
 }
 
 extension BagsVC: UITableViewDelegate, UITableViewDataSource {

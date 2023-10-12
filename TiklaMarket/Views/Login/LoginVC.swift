@@ -42,46 +42,50 @@ class LoginVC: UIViewController {
          }
     }
     
-    func saveUser(uid:String){
+    func saveUser(uid: String) {
         let ref = Database.database().reference()
         
         ref.child("Users").child(uid).observeSingleEvent(of: .value) { (snapshot, error) in
-
+            if let error = error {
+               // print("Veri çekme hatası: \(error.localizedDescription)")
+                return
+            }
+            
             if let userData = snapshot.value as? [String: Any] {
-      
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: userData, options: [])
                     let decoder = JSONDecoder()
                     let userDetails = try decoder.decode(UserModelDetails.self, from: jsonData)
+                    
                     UserModel.shared = UserModel()
                     UserModel.shared.uid = uid
                     UserModel.shared.details = userDetails
-                    
-                    /*adres: ["dsfdsfsdf","dfdsfsdfsdfdsf","fdsfdsfsdfsdfds" ]
-                    eskiadres = { "1.indetifier": { number: "4", }    }*/
 
-                    //save device
-                    let encoder = JSONEncoder()
-                    let user = try encoder.encode(UserModel.shared)
-                    //save user data & password
+                    // Şifreyi Keychain'e kaydet
+                    if let passwordData = self.passwordText.text?.data(using: .utf8) {
+                        KeychainHelper.save(passwordData, label: KeyChainKeys.password.rawValue)
+                    }
+
+                    // Kullanıcı oturum durumunu kaydet
                     UserDefaults.standard.setLoggedIn(value: true)
-                    UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
-                    //pass
-                    let data = Data(self.passwordText.text!.utf8)
-                    KeychainHelper.save(data, label: KeyChainKeys.password.rawValue)
+
+                    // UserModel'i cihazda sakla
+                    let encoder = JSONEncoder()
+                    if let user = try? encoder.encode(UserModel.shared) {
+                        UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+                    }
+                    
+                    // Ana ekrana yönlendir
                     self.performSegue(withIdentifier: "toMainVC", sender: nil)
-    
                 } catch {
-                    print("Unable to Encode Note (\(error))")
+                    print("Hata: \(error.localizedDescription)")
                 }
-                
             } else {
                 print("Kullanıcı verileri bulunamadı.")
             }
-        } withCancel: { (error) in
-            print("Veri çekme hatası: \(error.localizedDescription)")
         }
     }
+
     
     @IBAction func registerClicked(_ sender: Any) {
        

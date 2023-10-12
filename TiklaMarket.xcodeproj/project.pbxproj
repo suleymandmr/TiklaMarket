@@ -49,6 +49,7 @@
 		10BDF6EB2A962DC90058E72E /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDF6EA2A962DC90058E72E /* ProductDetailVC.swift */; };
 		10BDF6ED2A962E070058E72E /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BDF6EC2A962E070058E72E /* ProductDetail.swift */; };
 		10C0B5442A936264005A4CDD /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C0B5432A936264005A4CDD /* MainCollectionViewController.swift */; };
+		10C1CFB82AD7EC9C00C33D3C /* PastOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1CFB72AD7EC9C00C33D3C /* PastOrderModel.swift */; };
 		10CA10322AB04EDE00E3CB23 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CA10312AB04EDE00E3CB23 /* Constants.swift */; };
 		10CA10342AB04F6100E3CB23 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CA10332AB04F6100E3CB23 /* Extensions.swift */; };
 		10CA10372AB053AF00E3CB23 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CA10362AB053AF00E3CB23 /* KeychainHelper.swift */; };
@@ -103,6 +104,7 @@
 		10BDF6EA2A962DC90058E72E /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		10BDF6EC2A962E070058E72E /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		10C0B5432A936264005A4CDD /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		10C1CFB72AD7EC9C00C33D3C /* PastOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastOrderModel.swift; sourceTree = "<group>"; };
 		10CA10312AB04EDE00E3CB23 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		10CA10332AB04F6100E3CB23 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		10CA10352AB04FE300E3CB23 /* TiklaMarket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TiklaMarket.entitlements; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				108CAE662AAF3A9400BF6A6E /* AddressModel.swift */,
 				103DA50E2AC5A19900B2A2A9 /* BagsModel.swift */,
 				10A3BA442AC6A7EC001ABA77 /* PaymentModel.swift */,
+				10C1CFB72AD7EC9C00C33D3C /* PastOrderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				10A3BA452AC6A7EC001ABA77 /* PaymentModel.swift in Sources */,
 				10740B642AC2C8AC00E463AE /* PastOrderItem.swift in Sources */,
 				1068E4E12AC16BD2005992BB /* ShoppingCart.swift in Sources */,
+				10C1CFB82AD7EC9C00C33D3C /* PastOrderModel.swift in Sources */,
 				1025944E2A8B508A00F2711D /* TiklaMarket.xcdatamodeld in Sources */,
 				10894EEE2A9E191E00270B8D /* ManagementVC.swift in Sources */,
 				10DC25E12A94AA850059B843 /* Api.swift in Sources */,

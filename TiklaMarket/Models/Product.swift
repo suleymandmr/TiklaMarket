@@ -16,16 +16,13 @@ struct Product:Codable {
     //in bag
     var count:Int? = 0
 
-    init(name:String,
-         id:String,
-         imageURL:String,
-         pay:String,
-         subject:String){
-        self.name     = name
-        self.id       = id
+    init(name: String, id: String, imageURL: String, pay: String, subject: String) {
+        self.name = name
+        self.id = id
         self.imageURL = imageURL
-        self.pay      = pay
-        self.subject  = subject
+        self.pay = pay
+        self.subject = subject
+        self.count = 0
     }
     
     init(from decoder: Decoder) throws {
