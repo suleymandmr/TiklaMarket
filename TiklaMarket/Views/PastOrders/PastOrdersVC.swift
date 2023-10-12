@@ -16,8 +16,9 @@ class PastOrdersVC: UIViewController {
     var titleArray = [String]()
     var imageArray = [String]()
     var subjectArray = [String]()
-    var selectedCategory: PastProductItem?
-    
+    var selectedCategoryy: PastProductItem?
+   
+    var selectedCategory: PastOrderModel?
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()

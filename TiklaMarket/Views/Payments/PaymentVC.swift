@@ -73,8 +73,11 @@ class PaymentVC: UIViewController {
             UserModel.shared.details.pastOrders?.order = bags.products
         }
         
-        // Toplam ücreti güncelle
-        UserModel.shared.details.pastOrders?.ucret! = bags.totalPrice
+        if UserModel.shared.details.pastOrders == nil {
+            UserModel.shared.details.pastOrders = PastOrderModel()
+        }
+
+        UserModel.shared.details.pastOrders?.ucret = bags.totalPrice
 
         // Sepeti temizle
         clearCart()
@@ -108,11 +111,12 @@ class PaymentVC: UIViewController {
             }
         }
     }
+   
 
     func savePastOrderToFirebase() {
         if let pastOrders = UserModel.shared.details.pastOrders {
             let ref = Database.database().reference()
-            let userRef = ref.child("Users/\(UserModel.shared.uid)/pastOrders")
+            let userRef = ref.child("Users/\(UserModel.shared.uid)/pastOrders/").childByAutoId()
             let data = pastOrders.getAllData()
             
             userRef.setValue(data) { (error, reference) in

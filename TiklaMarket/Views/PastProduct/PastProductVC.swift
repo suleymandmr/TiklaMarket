@@ -2,23 +2,33 @@ import UIKit
 import Firebase
 
 class PastProductVC: UIViewController {
-    var arrat = [String]()
-    var payArray = [String]()
-    var noteArray = [String]()
-    var dateArray = [String]()
-    var productList = [PastProductItem]()
+    
+    
+    var productLists = [PastOrderModel]()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         tableView.allowsSelection = true
-        tableView.dataSource = self
-        tableView.delegate = self
+                tableView.dataSource = self
+                tableView.delegate = self
+        Task {
+                    await fetchDataFromRealtimeDatabase()
+                }
         
-        fetchGecmisSiparisDetayData()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+           Task {
+               await fetchDataFromRealtimeDatabase()
+           }
+       }
+    func fetchDataFromRealtimeDatabase() async {
+        let data = await Api().getPastOrders()
+        self.productLists = data ?? []
+        self.tableView.reloadData()
+    }
+   /*
     func fetchGecmisSiparisDetayData() {
         
         let userUID = UserModel.shared.uid
@@ -59,22 +69,23 @@ class PastProductVC: UIViewController {
         } withCancel: { (error) in
             print("Firebase GecmisSiparisler veri alma hatası: \(error.localizedDescription)")
         }
-    }
+    }*/
 }
 
 extension PastProductVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return payArray.count
+        return productLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PastProductCell
         
-        cell.payLabel.text = payArray[indexPath.row]
-        cell.noteLabel.text = noteArray[indexPath.row]
-        cell.dateLabel.text = dateArray[indexPath.row]
-        
+        let urun = productLists[indexPath.row]
+        cell.payLabel.text = String(urun.ucret!)
+        cell.noteLabel.text = urun.not
+        cell.dateLabel.text = urun.siparisTarihi
+       // print("s" + urun.not)
         return cell
     }
     
@@ -85,19 +96,26 @@ extension PastProductVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let category = productList[indexPath.row]
-        photoTapped(at: category)
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedOrder = productLists[indexPath.row]
+        navigateToProductDetail(selectedOrder: selectedOrder)
     }
-    
+
+    func navigateToProductDetail(selectedOrder: PastOrderModel) {
+        guard let productDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PastOrdersVC") as? PastOrdersVC else {
+            return
+        }
+        productDetailVC.selectedCategory = selectedOrder
+        navigationController?.pushViewController(productDetailVC, animated: true)
+    }
+
 }
 extension PastProductVC {
     func photoTapped(at category: PastProductItem) {
         
         //print("Photo tapped at index: \(id)")
         let next = self.storyboard?.instantiateViewController(withIdentifier: "PastOrdersVC") as! PastOrdersVC
-        next.selectedCategory = category
+        //next.selectedCategory = category
         //next.photoData = photoData
         //self.present(next, animated: true, completion: nil)
         self.navigationController?.pushViewController(next, animated: true)
