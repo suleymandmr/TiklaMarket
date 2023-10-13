@@ -12,23 +12,20 @@ import SDWebImage
 
 class PastOrdersVC: UIViewController {
     var pastOrderItem = [PastOrderItem]()
-    var pastOrderDataArray : [PastOrder] = []
-    var titleArray = [String]()
-    var imageArray = [String]()
-    var subjectArray = [String]()
+   
     var selectedCategoryy: PastProductItem?
    
-    var selectedCategory: PastOrderModel?
+    var selectedPastOrder: PastOrderModel?
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fetchDataFromRealtimeDatabase()
+        print("sss\(selectedPastOrder?.getAllData())")
+        
         tableView.allowsSelection = true
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
+    /*
     func fetchDataFromRealtimeDatabase() {
         let userUID = UserModel.shared.uid // Kullanıcının UID'si
         
@@ -81,7 +78,7 @@ class PastOrdersVC: UIViewController {
             print("Firebase Bags veri alma hatası: \(error.localizedDescription)")
         }
      }
-    
+    */
     
     
     
@@ -90,14 +87,14 @@ class PastOrdersVC: UIViewController {
 extension PastOrdersVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleArray.count
+        return selectedPastOrder!.order!.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PastOrderCell
-       
-        cell.titleLabel.text = titleArray[indexPath.row]
-        cell.subjectLabel.text = subjectArray[indexPath.row]
-        cell.pastOrderImageView.sd_setImage(with: URL(string: imageArray[indexPath.row]))
+        let urun = selectedPastOrder!.order?[indexPath.row]
+        cell.titleLabel.text = urun?.name
+        cell.subjectLabel.text = (urun?.pay)! + " tl"
+        cell.pastOrderImageView.sd_setImage(with: URL(string: (urun?.imageURL)! ))
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,5 +104,22 @@ extension PastOrdersVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
-    
+    func navigateToProductDetail(selectedProduct: Product) {
+        guard let productDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProductDetailVC") as? ProductDetailVC else {
+            return
+        }
+        productDetailVC.selectedProduct = selectedProduct
+        navigationController?.pushViewController(productDetailVC, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedProduct = selectedPastOrder?.order?[indexPath.row] else {
+            print("Hata: Seçilen ürün bulunamadı.")
+            return
+        }
+
+        navigateToProductDetail(selectedProduct: selectedProduct)
+        print("searchList\(selectedProduct)")
+    }
+
 }

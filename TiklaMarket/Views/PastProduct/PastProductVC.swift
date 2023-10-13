@@ -105,7 +105,7 @@ extension PastProductVC: UITableViewDelegate, UITableViewDataSource {
         guard let productDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PastOrdersVC") as? PastOrdersVC else {
             return
         }
-        productDetailVC.selectedCategory = selectedOrder
+        productDetailVC.selectedPastOrder = selectedOrder
         navigationController?.pushViewController(productDetailVC, animated: true)
     }
 

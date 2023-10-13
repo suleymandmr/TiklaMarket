@@ -6,8 +6,3 @@
 //
 
 import Foundation
-struct PastOrder{
-    var image : String
-    var title : String
-    var subject : String
-}
