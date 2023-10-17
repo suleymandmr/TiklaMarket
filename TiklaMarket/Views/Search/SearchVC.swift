@@ -15,7 +15,6 @@ class SearchVC: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
         title = "Arama"
         tableView.dataSource = self
         tableView.delegate = self
-        
         // Verileri başlangıçta çekin
         Task {
             await fetchDataFromRealtimeDatabase()

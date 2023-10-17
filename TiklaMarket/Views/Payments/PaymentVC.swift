@@ -21,6 +21,7 @@ class PaymentVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTotalPriceLabel()
+        initializeHideKeyboard()
     }
     
     func updateTotalPriceLabel() {
@@ -36,7 +37,7 @@ class PaymentVC: UIViewController {
             }
         }
         
-        payLabel.text = "\(totalPrice)"
+        payLabel.text = "\(totalPrice) tl"
     }
     
     func getCurrentDateTime() -> String {
@@ -56,15 +57,20 @@ class PaymentVC: UIViewController {
         UserModel.shared.details.pastOrders?.tur = "Cash" // Nakit ödeme türü
     }
     
+    @IBAction func cancelClicked(_ sender: Any) {
+        // Kullanıcı "Vazgeç" butonuna bastığında hiçbir şey yapma, yalnızca alerti kapat
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func confirmCartClicked(_ sender: Any) {
         guard let bags = UserModel.shared.details.bags, !bags.products.isEmpty else {
             return
         }
-        
+
         if UserModel.shared.details.pastOrders == nil {
             UserModel.shared.details.pastOrders = PastOrderModel()
         }
-        
+
         // Sepetteki ürünleri PastOrderModel'e ekle
         if var pastOrderProducts = UserModel.shared.details.pastOrders?.order {
             pastOrderProducts.append(contentsOf: bags.products)
@@ -72,7 +78,7 @@ class PaymentVC: UIViewController {
         } else {
             UserModel.shared.details.pastOrders?.order = bags.products
         }
-        
+
         if UserModel.shared.details.pastOrders == nil {
             UserModel.shared.details.pastOrders = PastOrderModel()
         }
@@ -84,7 +90,8 @@ class PaymentVC: UIViewController {
 
         // Notu al ve notLabel'a yazdır
         if let note = noteText.text {
-            UserModel.shared.details.pastOrders?.not = note        }
+            UserModel.shared.details.pastOrders?.not = note
+        }
 
         // Geçerli tarih ve saati al
         let currentDateTime = getCurrentDateTime()
@@ -95,8 +102,8 @@ class PaymentVC: UIViewController {
         // PastOrderModel'i Firebase'e kaydet
         savePastOrderToFirebase()
 
-        // Ücreti sıfırlama
-        updateTotalPriceLabel()
+        // Ödeme onayı için alerti göster ve Firebase'e kayıt yapılmasını sağla
+        displayAlert()
     }
 
     func clearCart() {
@@ -112,7 +119,6 @@ class PaymentVC: UIViewController {
         }
     }
    
-
     func savePastOrderToFirebase() {
         if let pastOrders = UserModel.shared.details.pastOrders {
             let ref = Database.database().reference()
@@ -127,5 +133,44 @@ class PaymentVC: UIViewController {
                 }
             }
         }
+    }
+
+    func displayAlert() {
+        let alertController = UIAlertController(title: "Ödeme Onaylandı", message: "İşleminiz alındı en kısa zamanda size ulaşaktır.", preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "Tamam", style: .default) { _ in
+            self.navigateToMainPage()
+        }
+
+
+        alertController.addAction(okAction)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func navigateToMainPage() {
+        
+        if let mainVC = storyboard?.instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+            navigationController?.pushViewController(mainVC, animated: true)
+        }
+    }
+   
+}
+extension PaymentVC {
+
+    func initializeHideKeyboard(){
+        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissMyKeyboard))
+
+        //Add this tap gesture recognizer to the parent view
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissMyKeyboard(){
+        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+        //In short- Dismiss the active keyboard.
+        view.endEditing(true)
     }
 }

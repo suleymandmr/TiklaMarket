@@ -17,7 +17,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        passwordText.isSecureTextEntry = true
         initializeHideKeyboard()
     }
     

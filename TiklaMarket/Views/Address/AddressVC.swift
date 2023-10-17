@@ -74,11 +74,11 @@ extension AddressVC: UITableViewDelegate, UITableViewDataSource {
         
         switch UserModel.shared.details.address[indexPath.row].type {
         case AddressTypes.home.rawValue:
-            cell.addressImageView.sd_setImage(with: URL(string:AddressImages.home.rawValue))
+            cell.addressImageView.sd_setImage(with: URL(string:AddressImages.office.rawValue))
             break
             
         case AddressTypes.office.rawValue:
-            cell.addressImageView.sd_setImage(with: URL(string: AddressImages.office.rawValue))
+            cell.addressImageView.sd_setImage(with: URL(string: AddressImages.home.rawValue))
             break
             
             

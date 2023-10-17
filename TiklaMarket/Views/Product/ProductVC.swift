@@ -145,7 +145,7 @@ extension ProductVC: UICollectionViewDelegate, UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionVC", for: indexPath) as! ProductCollectionVC
             
             let product = activeProductList[indexPath.row] as! Product
-            cell.payLabel.text = product.pay
+            cell.payLabel.text = product.pay! + " tl"
             cell.productLabel.text = product.name
             cell.productImageView.sd_setImage(with: URL(string: product.imageURL!))
             return cell

@@ -75,8 +75,7 @@ class BagsVC: UIViewController {
             for product in bags.products {
                 if let payString = product.pay, let countString = product.count,
                    let productPrice = Double(payString), let productCount = Double(exactly: countString) {
-                    totalPrice += productPrice * productCount
-                } else {
+                    totalPrice += productPrice * productCount                } else {
                     // Dönüşüm başarısız oldu, uygun bir hata yönetimi ekleyebilirsiniz
                     print("Dönüşüm başarısız oldu.")
                 }
@@ -84,7 +83,7 @@ class BagsVC: UIViewController {
         }
         
         UserModel.shared.details.bags?.totalPrice = totalPrice
-        feeLabel.text = "\(totalPrice)"
+        feeLabel.text = "\(totalPrice) tl"
     }
 
 }
@@ -104,7 +103,7 @@ extension BagsVC: UITableViewDelegate, UITableViewDataSource {
                   do {
                       let encoder = JSONEncoder()
                       let user = try encoder.encode(UserModel.shared)
-                      UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
+                      //UserDefaults.standard.set(user, forKey: UserDefaultsKeys.userData.rawValue)
                       let arr = UserModel.shared.details.bags!.products.map({ $0.getAllData() })
                       let ref = Database.database().reference()
                       let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags/products/")
@@ -127,7 +126,7 @@ extension BagsVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! BagsCell
         cell.productNameLabel.text = UserModel.shared.details.bags!.products[indexPath.row].name
         cell.productFeeLabel.text = "\(UserModel.shared.details.bags!.products[indexPath.row].count!) adet"
-        cell.payLabel.text = "bf:\(UserModel.shared.details.bags!.products[indexPath.row].pay!)"
+        cell.payLabel.text = "\(UserModel.shared.details.bags!.products[indexPath.row].pay!) tl"
         cell.productImageView.sd_setImage(with: URL(string: UserModel.shared.details.bags!.products[indexPath.row].imageURL ?? ""))
         return cell
     }

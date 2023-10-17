@@ -82,7 +82,7 @@ extension PastProductVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PastProductCell
         
         let urun = productLists[indexPath.row]
-        cell.payLabel.text = String(urun.ucret!)
+        cell.payLabel.text = String(urun.ucret!) + " tl"
         cell.noteLabel.text = urun.not
         cell.dateLabel.text = urun.siparisTarihi
        // print("s" + urun.not)

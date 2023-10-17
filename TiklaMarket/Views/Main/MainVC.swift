@@ -45,6 +45,8 @@ class MainVC: UIViewController ,CLLocationManagerDelegate, MKMapViewDelegate{
         fetchRealtimeDatabaseData()
         checkUser()
        
+        self.navigationItem.hidesBackButton = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
