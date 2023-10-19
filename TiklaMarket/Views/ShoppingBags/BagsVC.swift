@@ -6,7 +6,6 @@ import SDWebImage
 class BagsVC: UIViewController {
     @IBOutlet weak var feeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var shoppingCartItems = [ShoppingCartItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +18,11 @@ class BagsVC: UIViewController {
     }
     
     @IBAction func confirmCartClicked(_ sender: Any) {
+        if UserModel.shared.details.address.isEmpty {
+              // Adres eklenmemiş, kullanıcıya uyarı göster
+              displayAddressRequiredAlert()
+              return
+          }
         // Firebase veritabanı referansını alın
            let ref = Database.database().reference()
            
@@ -42,6 +46,25 @@ class BagsVC: UIViewController {
                }
            }
        }
+    func displayAddressRequiredAlert() {
+        let alertController = UIAlertController(title: "Adres Ekleme Gerekli", message: "Ödeme işlemi yapmadan önce bir adres eklemeniz gerekmektedir. Lütfen bir adres ekleyin.", preferredStyle: .alert)
+
+              let addAction = UIAlertAction(title: "Adres Ekle", style: .default) { _ in
+                  self.navigateToAddress()
+              }
+
+              let cancelAction = UIAlertAction(title: "İptal", style: .cancel, handler: nil)
+
+              alertController.addAction(addAction)
+              alertController.addAction(cancelAction)
+
+              present(alertController, animated: true, completion: nil)
+    }
+    func navigateToAddress() {
+          if let addressVC = storyboard?.instantiateViewController(withIdentifier: "AddressVC") as? AddressVC {
+              navigationController?.pushViewController(addressVC, animated: true)
+          }
+      }
     
     @IBAction func allDeleteClicked(_ sender: Any) {
         UserModel.shared.details.bags?.products = []

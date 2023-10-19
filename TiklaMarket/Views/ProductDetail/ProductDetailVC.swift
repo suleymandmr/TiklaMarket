@@ -53,21 +53,43 @@ class ProductDetailVC: UIViewController {
         counter += 1
         pieceLabel.text = "\(counter)"
     }
-    
     @IBAction func DetailButtonClicked(_ sender: Any) {
-        guard let productID = selectedProduct?.id else {
-                   return
-               }
-               //update device bag
-               selectedProduct?.count = Int(pieceLabel.text!)
-               UserModel.shared.details.bags!.totalPrice += (Double(selectedProduct!.pay!) ?? 0) * Double(selectedProduct!.count!)
-               UserModel.shared.details.bags!.products.append(selectedProduct!)
-               //update firebase by bag
-               let arr = UserModel.shared.details.bags!.getAllData()
-               let ref = Database.database().reference()
-               let userRef = ref.child("Users/"+UserModel.shared.uid+"/bags")
-               userRef.setValue(arr)
+        guard var selectedProduct = self.selectedProduct else {
+               return
            }
-
+           
+           if let count = Int(pieceLabel.text ?? "0") {
+               // Update the count property of the selected product
+               selectedProduct.count = count
+               
+               if var bags = UserModel.shared.details.bags {
+                   if let index = bags.products.firstIndex(where: { $0.id == selectedProduct.id }) {
+                       // Update the count of the product in the cart by adding to the existing count
+                       bags.products[index].count! += count
+                   } else {
+                       // If the product is not in the cart, add it
+                       bags.products.append(selectedProduct)
+                   }
+                   bags.totalPrice += (Double(selectedProduct.pay!) ?? 0) * Double(count)
+                   UserModel.shared.details.bags = bags
+               } else {
+                   // If the user's cart is empty, create a new cart with the selected product
+                   UserModel.shared.details.bags = BagsModel()
+               }
+               
+            // Toplam fiyatı güncelle
+            UserModel.shared.details.bags?.totalPrice += (Double(selectedProduct.pay!) ?? 0) * Double(count)
+            
+            // Firebase veritabanına güncellemeleri kaydetmek (Firebase kullanılıyorsa)
+            let ref = Database.database().reference()
+            let bagsRef = ref.child("Users/\(UserModel.shared.uid)/bags")
+            bagsRef.setValue(UserModel.shared.details.bags?.getAllData())
+            
+            // Başarılı bir şekilde ürünü sepete eklediğinizden emin olun
+            print("Ürün sepete eklendi.")
+            
+            // İhtiyaçlarınıza göre ek işlemleri yapabilirsiniz.
+        }
+    }
 
 }

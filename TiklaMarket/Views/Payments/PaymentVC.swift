@@ -9,11 +9,15 @@ enum PaymentType: String {
 
 class PaymentVC: UIViewController {
     
+    @IBOutlet weak var creditCardButton: UIButton!
+    @IBOutlet weak var cashButton: UIButton!
+    
     var selectedProduct: Product?
     var paymentType: PaymentType = .Cash
     var payArray = [String]()
     var feeArray = [String]()
     
+    @IBOutlet weak var paymentTypeLabel: UILabel!
     @IBOutlet weak var payLabel: UILabel!
     @IBOutlet weak var noteText: UITextField!
     @IBOutlet weak var notLabel: UILabel!
@@ -22,6 +26,18 @@ class PaymentVC: UIViewController {
         super.viewDidLoad()
         updateTotalPriceLabel()
         initializeHideKeyboard()
+        
+        // Başlangıçta bir butonun seçili olduğunu belirtin (örneğin, "Kredi Kartı" butonu)
+        creditCardButton.isSelected = true
+        cashButton.isSelected = false
+        
+        // Butonlara tıklanma olaylarını ekleyin
+        creditCardButton.addTarget(self, action: #selector(creditCardClicked), for: .touchUpInside)
+        cashButton.addTarget(self, action: #selector(cashClicked), for: .touchUpInside)
+        
+        // Butonların başlangıç rengini ayarlayın
+        configureButton(creditCardButton)
+        configureButton(cashButton)
     }
     
     func updateTotalPriceLabel() {
@@ -47,20 +63,31 @@ class PaymentVC: UIViewController {
         return dateFormatter.string(from: currentDateTime)
     }
     
-    @IBAction func creditCardClicked(_ sender: Any) {
+    func configureButton(_ button: UIButton) {
+        button.layer.cornerRadius = 8
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.backgroundColor = UIColor.blue // Sabit mavi renk
+        button.setTitleColor(UIColor.white, for: .normal)
+    }
+    
+    @IBAction func creditCardClicked(_ sender: UIButton) {
         paymentType = .CreditCard
-        UserModel.shared.details.pastOrders?.tur = "CreditCard" // Kredi kartı ödeme türü
+        UserModel.shared.details.pastOrders?.tur = "CreditCard"
+        paymentTypeLabel.text = "Kredi Kartı"
     }
-    
-    @IBAction func cashClicked(_ sender: Any) {
+
+    @IBAction func cashClicked(_ sender: UIButton) {
         paymentType = .Cash
-        UserModel.shared.details.pastOrders?.tur = "Cash" // Nakit ödeme türü
+        UserModel.shared.details.pastOrders?.tur = "Cash"
+        paymentTypeLabel.text = "Nakit"
     }
-    
+
     @IBAction func cancelClicked(_ sender: Any) {
         // Kullanıcı "Vazgeç" butonuna bastığında hiçbir şey yapma, yalnızca alerti kapat
         dismiss(animated: true, completion: nil)
     }
+    
     
     @IBAction func confirmCartClicked(_ sender: Any) {
         guard let bags = UserModel.shared.details.bags, !bags.products.isEmpty else {
@@ -142,7 +169,6 @@ class PaymentVC: UIViewController {
             self.navigateToMainPage()
         }
 
-
         alertController.addAction(okAction)
 
         present(alertController, animated: true, completion: nil)
@@ -156,21 +182,18 @@ class PaymentVC: UIViewController {
     }
    
 }
+
 extension PaymentVC {
 
     func initializeHideKeyboard(){
-        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(dismissMyKeyboard))
 
-        //Add this tap gesture recognizer to the parent view
         view.addGestureRecognizer(tap)
     }
 
     @objc func dismissMyKeyboard(){
-        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
-        //In short- Dismiss the active keyboard.
         view.endEditing(true)
     }
 }
